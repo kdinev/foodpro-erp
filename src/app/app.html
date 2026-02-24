@@ -1,11 +1,13 @@
 <div class="erp-app-container ig-typography">
-  <!-- Top Toolbar -->
-  <div class="erp-toolbar">
-    <igx-icon igxRipple (click)="toggleDrawer()" style="cursor:pointer">menu</igx-icon>
-    <span class="erp-toolbar-title">FoodPro ERP</span>
+  <!-- Top Navbar -->
+  <igx-navbar [isActionButtonVisible]="false" class="app-navbar">
+    <div igxNavbarAction>
+      <igx-icon igxRipple (click)="toggleDrawer()" style="cursor:pointer">menu</igx-icon>
+    </div>
+    <span igxNavbarTitle style="font-size:20px;font-weight:500;letter-spacing:0.5px;flex:1">FoodPro ERP</span>
     @if ((dataService.alerts$ | async)?.length) {
-      <span style="position:relative; display:inline-flex; align-items:center;">
-        <igx-icon style="color:white">notifications</igx-icon>
+      <span style="position:relative;display:inline-flex;align-items:center;margin-right:8px">
+        <igx-icon>notifications</igx-icon>
         <igx-badge
           [value]="((dataService.alerts$ | async)?.length ?? 0)"
           type="error"
@@ -13,7 +15,7 @@
         </igx-badge>
       </span>
     }
-  </div>
+  </igx-navbar>
 
   <div class="erp-main-layout">
     <!-- Navigation Drawer -->

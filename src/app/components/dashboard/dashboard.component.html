@@ -1,13 +1,4 @@
 <div class="erp-page">
-  <!-- Page Navbar -->
-  <igx-navbar [isActionButtonVisible]="false" class="dash-navbar">
-    <div igxNavbarAction style="display:flex;align-items:center;gap:8px;pointer-events:none">
-      <igx-icon style="color:#1565C0">dashboard</igx-icon>
-    </div>
-    <span igxNavbarTitle>Dashboard</span>
-    <span style="font-size:13px;color:rgba(0,0,0,.54)">{{ today | date:'EEEE, MMMM d, y' }}</span>
-  </igx-navbar>
-
   <!-- Active Alerts Banner -->
   @if (alerts().length > 0) {
     <igx-card [elevated]="true" class="alerts-card">

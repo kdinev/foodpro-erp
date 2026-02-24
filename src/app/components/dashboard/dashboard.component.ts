@@ -6,7 +6,6 @@ import { IgxIconComponent } from 'igniteui-angular/icon';
 import { IgxLinearProgressBarComponent } from 'igniteui-angular/progressbar';
 import { IgxBadgeComponent } from 'igniteui-angular/badge';
 import { IGX_CARD_DIRECTIVES } from 'igniteui-angular/card';
-import { IGX_NAVBAR_DIRECTIVES } from 'igniteui-angular/navbar';
 import { ErpDataService } from '../../services/erp-data.service';
 
 @Component({
@@ -14,7 +13,7 @@ import { ErpDataService } from '../../services/erp-data.service';
   imports: [
     RouterLink, NgClass, TitleCasePipe, DatePipe, DecimalPipe,
     IgxIconComponent, IgxLinearProgressBarComponent, IgxBadgeComponent,
-    IGX_CARD_DIRECTIVES, IGX_NAVBAR_DIRECTIVES,
+    IGX_CARD_DIRECTIVES,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
