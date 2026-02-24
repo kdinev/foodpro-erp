@@ -1,0 +1,240 @@
+<div class="erp-page">
+  <div class="erp-page__header">
+    <h1 style="display:flex;align-items:center;gap:10px">
+      <igx-icon style="font-size:28px;color:#1565C0">people</igx-icon>
+      Customers &amp; Suppliers
+    </h1>
+  </div>
+
+  <igx-tabs>
+    <!-- ═══════════ CUSTOMERS TAB ═══════════ -->
+    <igx-tab-item>
+      <igx-tab-header>
+        <igx-icon igxTabHeaderIcon>person</igx-icon>
+        <span igxTabHeaderLabel>Customers ({{ customers().length }})</span>
+      </igx-tab-header>
+      <igx-tab-content>
+        <div class="grid-toolbar">
+          <span style="font-size:14px;color:#757575">Manage your customer accounts</span>
+          <button igxButton="raised" igxRipple (click)="openAddCustomer()" style="color:white;background:#1565C0">
+            <igx-icon>add</igx-icon> Add Customer
+          </button>
+        </div>
+
+        <igx-grid [data]="customers()" [autoGenerate]="false" [allowFiltering]="true" height="500px" width="100%">
+          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+          <igx-column field="contactName" header="Contact" [sortable]="true" dataType="string" width="160px"></igx-column>
+          <igx-column field="email" header="Email" [sortable]="true" dataType="string" width="220px"></igx-column>
+          <igx-column field="phone" header="Phone" dataType="string" width="160px"></igx-column>
+          <igx-column field="country" header="Country" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
+          <igx-column field="city" header="City" [sortable]="true" dataType="string" width="160px"></igx-column>
+          <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" dataType="string" width="110px">
+            <ng-template igxCell let-val>
+              <span class="status-chip" [ngClass]="val">{{ val | titlecase }}</span>
+            </ng-template>
+          </igx-column>
+          <igx-column field="registrationDate" header="Since" [sortable]="true" dataType="date" width="130px">
+            <ng-template igxCell let-val>{{ val | date:'mediumDate' }}</ng-template>
+          </igx-column>
+          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="100px" [pinned]="true">
+            <ng-template igxCell let-cell="cell">
+              <button igxButton="icon" igxRipple (click)="openEditCustomer(cell.row.data)" title="Edit">
+                <igx-icon style="color:#1565C0">edit</igx-icon>
+              </button>
+              <button igxButton="icon" igxRipple (click)="promptDeleteCustomer(cell.row.data.id)" title="Delete">
+                <igx-icon style="color:#D32F2F">delete</igx-icon>
+              </button>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+      </igx-tab-content>
+    </igx-tab-item>
+
+    <!-- ═══════════ SUPPLIERS TAB ═══════════ -->
+    <igx-tab-item>
+      <igx-tab-header>
+        <igx-icon igxTabHeaderIcon>local_shipping</igx-icon>
+        <span igxTabHeaderLabel>Suppliers ({{ suppliers().length }})</span>
+      </igx-tab-header>
+      <igx-tab-content>
+        <div class="grid-toolbar">
+          <span style="font-size:14px;color:#757575">Manage your ingredient suppliers</span>
+          <button igxButton="raised" igxRipple (click)="openAddSupplier()" style="color:white;background:#1565C0">
+            <igx-icon>add</igx-icon> Add Supplier
+          </button>
+        </div>
+
+        <igx-grid [data]="suppliers()" [autoGenerate]="false" [allowFiltering]="true" height="500px" width="100%">
+          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+          <igx-column field="contactName" header="Contact" [sortable]="true" dataType="string" width="160px"></igx-column>
+          <igx-column field="email" header="Email" dataType="string" width="220px"></igx-column>
+          <igx-column field="phone" header="Phone" dataType="string" width="160px"></igx-column>
+          <igx-column field="country" header="Country" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
+          <igx-column field="city" header="City" dataType="string" width="160px"></igx-column>
+          <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" dataType="string" width="110px">
+            <ng-template igxCell let-val>
+              <span class="status-chip" [ngClass]="val">{{ val | titlecase }}</span>
+            </ng-template>
+          </igx-column>
+          <igx-column header="Supplies" [filterable]="false" [sortable]="false" minWidth="200px">
+            <ng-template igxCell let-cell="cell">
+              <span style="font-size:12px;color:#616161">{{ getIngredientNamesForSupplier(cell.row.data.ingredientIds) }}</span>
+            </ng-template>
+          </igx-column>
+          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="100px">
+            <ng-template igxCell let-cell="cell">
+              <button igxButton="icon" igxRipple (click)="openEditSupplier(cell.row.data)" title="Edit">
+                <igx-icon style="color:#1565C0">edit</igx-icon>
+              </button>
+              <button igxButton="icon" igxRipple (click)="promptDeleteSupplier(cell.row.data.id)" title="Delete">
+                <igx-icon style="color:#D32F2F">delete</igx-icon>
+              </button>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+      </igx-tab-content>
+    </igx-tab-item>
+  </igx-tabs>
+</div>
+
+<!-- ═══════════ Customer Add/Edit Dialog ═══════════ -->
+<igx-dialog #customerDialog [isModal]="true" [closeOnEscape]="true">
+  <div class="dialog-wrapper">
+    <h2 class="dialog-title">{{ dialogTitle() }}</h2>
+    <form [formGroup]="customerForm" class="dialog-form">
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Company Name *</label>
+          <input igxInput formControlName="name" type="text" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>Contact Name *</label>
+          <input igxInput formControlName="contactName" type="text" />
+        </igx-input-group>
+      </div>
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Email *</label>
+          <input igxInput formControlName="email" type="email" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>Phone</label>
+          <input igxInput formControlName="phone" type="tel" />
+        </igx-input-group>
+      </div>
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Country *</label>
+          <input igxInput formControlName="country" type="text" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>City *</label>
+          <input igxInput formControlName="city" type="text" />
+        </igx-input-group>
+      </div>
+      <igx-input-group type="border" style="width:100%">
+        <label igxLabel>Address</label>
+        <input igxInput formControlName="address" type="text" />
+      </igx-input-group>
+      <div class="form-row">
+        <igx-select formControlName="status" placeholder="Status">
+          <label igxLabel>Status *</label>
+          <igx-select-item value="active">Active</igx-select-item>
+          <igx-select-item value="inactive">Inactive</igx-select-item>
+        </igx-select>
+        <igx-date-picker formControlName="registrationDate" [displayFormat]="'mediumDate'">
+          <label igxLabel>Registration Date</label>
+        </igx-date-picker>
+      </div>
+    </form>
+    <div class="dialog-actions">
+      <button igxButton="flat" igxRipple (click)="customerDialog.close()">Cancel</button>
+      <button igxButton="raised" igxRipple (click)="saveCustomer()"
+        [disabled]="customerForm.invalid"
+        style="background:#1565C0;color:white">
+        Save
+      </button>
+    </div>
+  </div>
+</igx-dialog>
+
+<!-- ═══════════ Supplier Add/Edit Dialog ═══════════ -->
+<igx-dialog #supplierDialog [isModal]="true" [closeOnEscape]="true">
+  <div class="dialog-wrapper">
+    <h2 class="dialog-title">{{ dialogTitle() }}</h2>
+    <form [formGroup]="supplierForm" class="dialog-form">
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Company Name *</label>
+          <input igxInput formControlName="name" type="text" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>Contact Name *</label>
+          <input igxInput formControlName="contactName" type="text" />
+        </igx-input-group>
+      </div>
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Email *</label>
+          <input igxInput formControlName="email" type="email" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>Phone</label>
+          <input igxInput formControlName="phone" type="tel" />
+        </igx-input-group>
+      </div>
+      <div class="form-row">
+        <igx-input-group type="border">
+          <label igxLabel>Country *</label>
+          <input igxInput formControlName="country" type="text" />
+        </igx-input-group>
+        <igx-input-group type="border">
+          <label igxLabel>City *</label>
+          <input igxInput formControlName="city" type="text" />
+        </igx-input-group>
+      </div>
+      <igx-input-group type="border" style="width:100%">
+        <label igxLabel>Address</label>
+        <input igxInput formControlName="address" type="text" />
+      </igx-input-group>
+      <div class="form-row">
+        <igx-select formControlName="status" placeholder="Status">
+          <label igxLabel>Status *</label>
+          <igx-select-item value="active">Active</igx-select-item>
+          <igx-select-item value="inactive">Inactive</igx-select-item>
+        </igx-select>
+        <igx-date-picker formControlName="registrationDate" [displayFormat]="'mediumDate'">
+          <label igxLabel>Registration Date</label>
+        </igx-date-picker>
+      </div>
+    </form>
+    <div class="dialog-actions">
+      <button igxButton="flat" igxRipple (click)="supplierDialog.close()">Cancel</button>
+      <button igxButton="raised" igxRipple (click)="saveSupplier()"
+        [disabled]="supplierForm.invalid"
+        style="background:#1565C0;color:white">
+        Save
+      </button>
+    </div>
+  </div>
+</igx-dialog>
+
+<!-- ═══════════ Confirm Delete Dialog ═══════════ -->
+<igx-dialog #confirmDialog [isModal]="true" [closeOnEscape]="true">
+  <div class="dialog-wrapper" style="max-width:400px">
+    <h2 class="dialog-title" style="color:#D32F2F">
+      <igx-icon style="vertical-align:middle;margin-right:8px">warning</igx-icon>
+      Confirm Delete
+    </h2>
+    <p style="margin-bottom:24px;color:#424242">
+      Are you sure you want to delete this record? This action cannot be undone.
+    </p>
+    <div class="dialog-actions">
+      <button igxButton="flat" igxRipple (click)="confirmDialog.close()">Cancel</button>
+      <button igxButton="raised" igxRipple (click)="confirmDelete()"
+        style="background:#D32F2F;color:white">
+        Delete
+      </button>
+    </div>
+  </div>
+</igx-dialog>

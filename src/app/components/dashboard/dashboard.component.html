@@ -1,0 +1,193 @@
+<div class="erp-page">
+  <!-- Page Navbar -->
+  <igx-navbar [isActionButtonVisible]="false" class="dash-navbar">
+    <div igxNavbarAction style="display:flex;align-items:center;gap:8px;pointer-events:none">
+      <igx-icon style="color:#1565C0">dashboard</igx-icon>
+    </div>
+    <span igxNavbarTitle>Dashboard</span>
+    <span style="font-size:13px;color:rgba(0,0,0,.54)">{{ today | date:'EEEE, MMMM d, y' }}</span>
+  </igx-navbar>
+
+  <!-- Active Alerts Banner -->
+  @if (alerts().length > 0) {
+    <igx-card [elevated]="true" class="alerts-card">
+      <igx-card-header>
+        <div igxCardHeaderTitle style="display:flex;align-items:center;gap:8px;color:#D32F2F">
+          <igx-icon>warning_amber</igx-icon>
+          Active Alerts
+          <igx-badge [value]="alerts().length" type="error" style="margin-left:4px"></igx-badge>
+        </div>
+      </igx-card-header>
+      <igx-card-content>
+        <div class="alerts-list">
+          @for (alert of alerts(); track alert.id) {
+            <div class="alert-card" [ngClass]="alert.severity">
+              <igx-icon>{{ getAlertIcon(alert.type) }}</igx-icon>
+              <div class="alert-content">
+                <div class="alert-message">{{ alert.message }}</div>
+                <div class="alert-date">{{ alert.date | date:'short' }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </igx-card-content>
+    </igx-card>
+  }
+
+  <!-- KPI Cards -->
+  @if (kpis(); as k) {
+    <div class="kpi-row">
+      <igx-card [elevated]="true" class="kpi-card" [class.error]="k.delayedOrders > 0">
+        <igx-card-content>
+          <div class="kpi-label">Active Orders</div>
+          <div class="kpi-value">{{ k.totalActiveOrders }}</div>
+          <div class="kpi-sub">
+            @if (k.delayedOrders > 0) {
+              <span style="color:#D32F2F"><igx-icon style="font-size:14px;vertical-align:middle">warning</igx-icon> {{ k.delayedOrders }} delayed</span>
+            } @else {
+              <span style="color:#2E7D32"><igx-icon style="font-size:14px;vertical-align:middle">check_circle</igx-icon> On schedule</span>
+            }
+          </div>
+        </igx-card-content>
+      </igx-card>
+
+      <igx-card [elevated]="true" class="kpi-card success">
+        <igx-card-content>
+          <div class="kpi-label">Shipped This Month</div>
+          <div class="kpi-value">{{ k.ordersShippedThisMonth }}</div>
+          <div class="kpi-sub">customer orders</div>
+        </igx-card-content>
+      </igx-card>
+
+      <igx-card [elevated]="true" class="kpi-card" [class.warning]="k.lowInventoryIngredients > 0">
+        <igx-card-content>
+          <div class="kpi-label">Low Inventory</div>
+          <div class="kpi-value">{{ k.lowInventoryIngredients }}</div>
+          <div class="kpi-sub">ingredients below threshold</div>
+        </igx-card-content>
+      </igx-card>
+
+      <igx-card [elevated]="true" class="kpi-card" [class.warning]="k.delayedShipments > 0">
+        <igx-card-content>
+          <div class="kpi-label">Pending Supply Orders</div>
+          <div class="kpi-value">{{ k.pendingIngredientOrders }}</div>
+          <div class="kpi-sub">
+            @if (k.delayedShipments > 0) {
+              <span style="color:#E65100">{{ k.delayedShipments }} shipment(s) delayed</span>
+            } @else {
+              all on time
+            }
+          </div>
+        </igx-card-content>
+      </igx-card>
+
+      <igx-card [elevated]="true" class="kpi-card">
+        <igx-card-content>
+          <div class="kpi-label">Customers / Suppliers</div>
+          <div class="kpi-value">{{ k.totalCustomers }}</div>
+          <div class="kpi-sub">{{ k.totalSuppliers }} active suppliers</div>
+        </igx-card-content>
+      </igx-card>
+    </div>
+  }
+
+  <!-- Bottom Two-Column Section -->
+  <div class="dashboard-bottom">
+    <!-- Active Orders -->
+    <igx-card [elevated]="true" class="section-igx-card">
+      <igx-card-header>
+        <div igxCardHeaderTitle style="display:flex;align-items:center;gap:8px">
+          <igx-icon>receipt_long</igx-icon>
+          Active Orders
+        </div>
+        <div igxCardHeaderSubtitle>
+          <a routerLink="/orders" class="view-all-link">View all &rarr;</a>
+        </div>
+      </igx-card-header>
+      <igx-card-content>
+        @for (order of activeOrders(); track order.id) {
+          <igx-card [elevated]="false" class="order-card" [class.order-card--delayed]="order.isDelayed">
+            <igx-card-header>
+              <div igxCardHeaderTitle style="display:flex;align-items:center;gap:8px;font-size:14px">
+                <span class="order-card__number">{{ order.orderNumber }}</span>
+                <span class="status-chip" [ngClass]="order.status">{{ order.status | titlecase }}</span>
+                @if (order.isDelayed) {
+                  <span class="status-chip error" style="background:#FFEBEE;color:#D32F2F">
+                    <igx-icon style="font-size:12px;vertical-align:middle">schedule</igx-icon> DELAYED
+                  </span>
+                }
+              </div>
+              <div igxCardHeaderSubtitle>{{ order.customerName }}</div>
+            </igx-card-header>
+            <igx-card-content>
+              @if (order.status === 'in-production') {
+                <div class="order-card__progress">
+                  <igx-linear-bar
+                    [value]="order.productionProgress"
+                    [max]="100"
+                    [type]="getProgressType(order.productionProgress, order.isDelayed)"
+                    [animate]="true"
+                    style="flex:1">
+                  </igx-linear-bar>
+                  <span class="progress-label">{{ order.productionProgress }}% produced</span>
+                </div>
+              }
+              <div class="order-card__meta">
+                <span>Due: {{ order.dueDate | date:'mediumDate' }}</span>
+                <span>{{ order.items.length }} product(s)</span>
+                <span>${{ order.totalValue | number:'1.0-0' }}</span>
+              </div>
+            </igx-card-content>
+          </igx-card>
+        } @empty {
+          <div style="padding:24px;text-align:center;color:#757575">
+            <igx-icon style="font-size:48px;display:block;margin:0 auto 8px">inbox</igx-icon>
+            No active orders at the moment.
+          </div>
+        }
+      </igx-card-content>
+    </igx-card>
+
+    <!-- Inventory Alerts -->
+    <igx-card [elevated]="true" class="section-igx-card">
+      <igx-card-header>
+        <div igxCardHeaderTitle style="display:flex;align-items:center;gap:8px">
+          <igx-icon style="color:#E65100">inventory_2</igx-icon>
+          Low Inventory
+        </div>
+        <div igxCardHeaderSubtitle>
+          <a routerLink="/inventory" class="view-all-link">Manage &rarr;</a>
+        </div>
+      </igx-card-header>
+      <igx-card-content>
+        @for (ing of lowIngredients(); track ing.id) {
+          <div class="inv-row">
+            <div class="inv-row__header">
+              <span class="inv-row__name">{{ ing.name }}</span>
+              <span class="status-chip warning">Below Threshold</span>
+            </div>
+            <igx-linear-bar
+              [value]="ing.currentStock"
+              [max]="ing.reorderThreshold * 2"
+              type="warning"
+              [animate]="true"
+              style="width:100%">
+            </igx-linear-bar>
+            <div class="inv-row__meta">
+              <span>{{ ing.currentStock }} {{ ing.unit }} in stock</span>
+              <span>Reorder at {{ ing.reorderThreshold }} {{ ing.unit }}</span>
+            </div>
+            <div style="font-size:11px;color:#757575;margin-top:2px">
+              Suppliers: {{ getSupplierNames(ing) }}
+            </div>
+          </div>
+        } @empty {
+          <div style="display:flex;align-items:center;gap:8px;padding:16px 0;color:#2E7D32">
+            <igx-icon>check_circle</igx-icon>
+            All ingredient stocks are healthy!
+          </div>
+        }
+      </igx-card-content>
+    </igx-card>
+  </div>
+</div>
