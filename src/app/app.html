@@ -19,7 +19,7 @@
 
   <div class="erp-main-layout">
     <!-- Navigation Drawer -->
-    <igx-nav-drawer #drawer [isOpen]="true" [pinThreshold]="0" [pin]="true" style="--igx-nav-drawer-width:220px; --igx-nav-drawer-background:#1A237E;">
+    <igx-nav-drawer #drawer [isOpen]="true" [pinThreshold]="0" [pin]="true">
       <ng-template igxDrawer>
         <nav>
           <span igxDrawerItem [isHeader]="true" class="erp-nav-header">Main Menu</span>
@@ -28,9 +28,8 @@
               [routerLink]="item.path"
               routerLinkActive
               #rla="routerLinkActive"
-              [active]="rla.isActive"
-              style="color:rgba(255,255,255,0.85); display:flex; align-items:center; gap:12px; padding:12px 20px; cursor:pointer;">
-              <igx-icon style="color:rgba(255,255,255,0.85)">{{ item.icon }}</igx-icon>
+              [active]="rla.isActive">
+              <igx-icon>{{ item.icon }}</igx-icon>
               <span>{{ item.label }}</span>
             </span>
           }

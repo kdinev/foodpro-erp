@@ -14,7 +14,7 @@ import { IGX_TABS_DIRECTIVES } from 'igniteui-angular/tabs';
 import { IgxDialogComponent } from 'igniteui-angular/dialog';
 import { IGX_INPUT_GROUP_DIRECTIVES } from 'igniteui-angular/input-group';
 import { IgxSelectComponent, IgxSelectItemComponent } from 'igniteui-angular/select';
-import { IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
+import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
 import { IgxIconComponent } from 'igniteui-angular/icon';
 import { IgxDatePickerComponent } from 'igniteui-angular/date-picker';
 import { ErpDataService } from '../../services/erp-data.service';
@@ -27,7 +27,7 @@ import { Customer, Supplier } from '../../models/erp.models';
     IGX_GRID_DIRECTIVES, IGX_TABS_DIRECTIVES,
     IgxDialogComponent,
     IGX_INPUT_GROUP_DIRECTIVES, IgxSelectComponent, IgxSelectItemComponent,
-    IgxButtonDirective, IgxIconComponent, IgxRippleDirective,
+    IgxButtonDirective, IgxIconButtonDirective, IgxIconComponent, IgxRippleDirective,
     IgxDatePickerComponent,
   ],
   templateUrl: './customers-suppliers.component.html',

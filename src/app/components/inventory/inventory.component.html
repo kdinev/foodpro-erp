@@ -128,9 +128,9 @@
               </igx-chips-area>
             </ng-template>
           </igx-column>
-          <igx-column header="Order" [sortable]="false" [filterable]="false" width="90px">
+          <igx-column header="Order" [sortable]="false" [filterable]="false" width="56px">
             <ng-template igxCell let-cell="cell">
-              <button igxButton="icon" igxRipple (click)="openOrderDialog(cell.row.data)" title="Place Order"
+              <button igxIconButton="flat" igxRipple (click)="openOrderDialog(cell.row.data)" title="Place Order"
                 [style.color]="cell.row.data.isLow ? '#D32F2F' : '#1565C0'">
                 <igx-icon>add_shopping_cart</igx-icon>
               </button>

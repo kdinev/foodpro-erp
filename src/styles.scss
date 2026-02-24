@@ -66,6 +66,26 @@ html, body {
   }
 }
 
+$erp-navdrawer-theme: navdrawer-theme(
+  $background: #1A237E,
+  $item-text-color: rgba(255, 255, 255, 0.85),
+  $item-icon-color: rgba(255, 255, 255, 0.70),
+  $item-header-text-color: rgba(255, 255, 255, 0.50),
+  $item-hover-background: rgba(255, 255, 255, 0.08),
+  $item-hover-text-color: #ffffff,
+  $item-hover-icon-color: #ffffff,
+  $item-active-background: #1565C0,
+  $item-active-text-color: #ffffff,
+  $item-active-icon-color: #ffffff,
+  $item-border-radius: 0 24px 24px 0
+);
+
+@include css-vars($erp-navdrawer-theme);
+
+igx-nav-drawer {
+  --igx-nav-drawer-size: 220px;
+}
+
 .erp-nav-header {
   padding: 16px 20px 8px;
   color: rgba(255,255,255,0.7);
