@@ -53,30 +53,37 @@ html, body {
   }
 }
 
-.erp-toolbar {
-  display: flex;
-  align-items: center;
-  height: 64px;
-  background: #1565C0;
-  color: white;
-  padding: 0 16px;
-  gap: 12px;
-  z-index: 100;
-  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+.app-navbar {
   flex-shrink: 0;
-
-  .erp-toolbar-title {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    flex: 1;
-  }
+  z-index: 100;
+  --igx-navbar-background: #1565C0;
+  --igx-navbar-title-text-color: white;
+  --igx-navbar-idle-icon-color: white;
 
   igx-icon {
     color: white;
     cursor: pointer;
-    font-size: 24px;
   }
+}
+
+$erp-navdrawer-theme: navdrawer-theme(
+  $background: #1A237E,
+  $item-text-color: rgba(255, 255, 255, 0.85),
+  $item-icon-color: rgba(255, 255, 255, 0.70),
+  $item-header-text-color: rgba(255, 255, 255, 0.50),
+  $item-hover-background: rgba(255, 255, 255, 0.08),
+  $item-hover-text-color: #ffffff,
+  $item-hover-icon-color: #ffffff,
+  $item-active-background: #1565C0,
+  $item-active-text-color: #ffffff,
+  $item-active-icon-color: #ffffff,
+  $item-border-radius: 0 24px 24px 0
+);
+
+@include css-vars($erp-navdrawer-theme);
+
+igx-nav-drawer {
+  --igx-nav-drawer-size: 220px;
 }
 
 .erp-nav-header {

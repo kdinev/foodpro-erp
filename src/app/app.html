@@ -1,11 +1,13 @@
 <div class="erp-app-container ig-typography">
-  <!-- Top Toolbar -->
-  <div class="erp-toolbar">
-    <igx-icon igxRipple (click)="toggleDrawer()" style="cursor:pointer">menu</igx-icon>
-    <span class="erp-toolbar-title">FoodPro ERP</span>
+  <!-- Top Navbar -->
+  <igx-navbar [isActionButtonVisible]="false" class="app-navbar">
+    <div igxNavbarAction>
+      <igx-icon igxRipple (click)="toggleDrawer()" style="cursor:pointer">menu</igx-icon>
+    </div>
+    <span igxNavbarTitle style="font-size:20px;font-weight:500;letter-spacing:0.5px;flex:1">FoodPro ERP</span>
     @if ((dataService.alerts$ | async)?.length) {
-      <span style="position:relative; display:inline-flex; align-items:center;">
-        <igx-icon style="color:white">notifications</igx-icon>
+      <span style="position:relative;display:inline-flex;align-items:center;margin-right:8px">
+        <igx-icon>notifications</igx-icon>
         <igx-badge
           [value]="((dataService.alerts$ | async)?.length ?? 0)"
           type="error"
@@ -13,11 +15,11 @@
         </igx-badge>
       </span>
     }
-  </div>
+  </igx-navbar>
 
   <div class="erp-main-layout">
     <!-- Navigation Drawer -->
-    <igx-nav-drawer #drawer [isOpen]="true" [pinThreshold]="0" [pin]="true" style="--igx-nav-drawer-width:220px; --igx-nav-drawer-background:#1A237E;">
+    <igx-nav-drawer #drawer [isOpen]="true" [pinThreshold]="0" [pin]="true">
       <ng-template igxDrawer>
         <nav>
           <span igxDrawerItem [isHeader]="true" class="erp-nav-header">Main Menu</span>
@@ -26,9 +28,8 @@
               [routerLink]="item.path"
               routerLinkActive
               #rla="routerLinkActive"
-              [active]="rla.isActive"
-              style="color:rgba(255,255,255,0.85); display:flex; align-items:center; gap:12px; padding:12px 20px; cursor:pointer;">
-              <igx-icon style="color:rgba(255,255,255,0.85)">{{ item.icon }}</igx-icon>
+              [active]="rla.isActive">
+              <igx-icon>{{ item.icon }}</igx-icon>
               <span>{{ item.label }}</span>
             </span>
           }

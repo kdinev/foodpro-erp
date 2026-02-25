@@ -132,9 +132,9 @@
         </ng-template>
       </igx-column>
 
-      <igx-column header="Action" [sortable]="false" [filterable]="false" width="90px">
+      <igx-column header="Action" [sortable]="false" [filterable]="false" width="56px">
         <ng-template igxCell let-cell="cell">
-          <button igxButton="icon" igxRipple (click)="openDetail(cell.row.data)" title="View Details">
+          <button igxIconButton="flat" igxRipple (click)="openDetail(cell.row.data)" title="View Details">
             <igx-icon style="color:#1565C0">visibility</igx-icon>
           </button>
         </ng-template>

@@ -36,12 +36,12 @@
           <igx-column field="registrationDate" header="Since" [sortable]="true" dataType="date" width="130px">
             <ng-template igxCell let-val>{{ val | date:'mediumDate' }}</ng-template>
           </igx-column>
-          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="100px" [pinned]="true">
+          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="88px" [pinned]="true">
             <ng-template igxCell let-cell="cell">
-              <button igxButton="icon" igxRipple (click)="openEditCustomer(cell.row.data)" title="Edit">
+              <button igxIconButton="flat" igxRipple (click)="openEditCustomer(cell.row.data)" title="Edit">
                 <igx-icon style="color:#1565C0">edit</igx-icon>
               </button>
-              <button igxButton="icon" igxRipple (click)="promptDeleteCustomer(cell.row.data.id)" title="Delete">
+              <button igxIconButton="flat" igxRipple (click)="promptDeleteCustomer(cell.row.data.id)" title="Delete">
                 <igx-icon style="color:#D32F2F">delete</igx-icon>
               </button>
             </ng-template>
@@ -81,12 +81,12 @@
               <span style="font-size:12px;color:#616161">{{ getIngredientNamesForSupplier(cell.row.data.ingredientIds) }}</span>
             </ng-template>
           </igx-column>
-          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="100px">
+          <igx-column header="Actions" [filterable]="false" [sortable]="false" width="88px">
             <ng-template igxCell let-cell="cell">
-              <button igxButton="icon" igxRipple (click)="openEditSupplier(cell.row.data)" title="Edit">
+              <button igxIconButton="flat" igxRipple (click)="openEditSupplier(cell.row.data)" title="Edit">
                 <igx-icon style="color:#1565C0">edit</igx-icon>
               </button>
-              <button igxButton="icon" igxRipple (click)="promptDeleteSupplier(cell.row.data.id)" title="Delete">
+              <button igxIconButton="flat" igxRipple (click)="promptDeleteSupplier(cell.row.data.id)" title="Delete">
                 <igx-icon style="color:#D32F2F">delete</igx-icon>
               </button>
             </ng-template>

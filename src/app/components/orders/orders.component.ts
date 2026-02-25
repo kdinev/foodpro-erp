@@ -10,7 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NgClass, TitleCasePipe, DatePipe, DecimalPipe } from '@angular/common';
 import { IGX_GRID_DIRECTIVES } from 'igniteui-angular/grids/grid';
 import { IgxDialogComponent } from 'igniteui-angular/dialog';
-import { IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
+import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
 import { IgxIconComponent } from 'igniteui-angular/icon';
 import { IgxLinearProgressBarComponent } from 'igniteui-angular/progressbar';
 import { IgxBadgeComponent } from 'igniteui-angular/badge';
@@ -24,7 +24,7 @@ import { CustomerOrder, OrderItem, OrderStatus } from '../../models/erp.models';
     NgClass, TitleCasePipe, DatePipe, DecimalPipe,
     IGX_GRID_DIRECTIVES,
     IgxDialogComponent,
-    IgxButtonDirective, IgxIconComponent, IgxRippleDirective,
+    IgxButtonDirective, IgxIconButtonDirective, IgxIconComponent, IgxRippleDirective,
     IgxLinearProgressBarComponent, IgxBadgeComponent,
     IgxChipComponent, IgxChipsAreaComponent,
   ],
