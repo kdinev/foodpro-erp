@@ -1,16 +1,168 @@
 @use '@infragistics/igniteui-angular/theming' as *;
 
-// ──────────────────────────────────────────────
-// Palette
-// ──────────────────────────────────────────────
-$primary-color: #1565c0;
-$secondary-color: #e65100;
-$surface-color: #fafafa;
+// ══════════════════════════════════════════════
+// Rosé Pine Theme
+// https://rosepinetheme.com
+// ══════════════════════════════════════════════
 
-$erp-theme-palette: palette(
-  $primary: $primary-color,
-  $secondary: $secondary-color,
-  $surface: $surface-color,
+// ──────────────────────────────────────────────
+// Rosé Pine color tokens
+// ──────────────────────────────────────────────
+$rp-base:       #191724;  // Base background
+$rp-surface:    #1f1d2e;  // Surface / cards
+$rp-overlay:    #26233a;  // Overlay / elevated surfaces
+$rp-muted:      #6e6a86;  // Muted text
+$rp-subtle:     #908caa;  // Subtle text
+$rp-text:       #e0def4;  // Primary text
+$rp-love:       #eb6f92;  // Rose / love (primary + error)
+$rp-gold:       #f6c177;  // Gold (warnings)
+$rp-rose:       #ebbcba;  // Rose (soft accent)
+$rp-pine:       #31748f;  // Pine (info)
+$rp-foam:       #9ccfd8;  // Foam (light teal)
+$rp-iris:       #c4a7e7;  // Iris (secondary)
+$rp-highlight-low:  #21202e;  // Highlight low
+$rp-highlight-med:  #403d52;  // Highlight medium
+$rp-highlight-high: #524f67;  // Highlight high
+
+// ──────────────────────────────────────────────
+// Custom palette (explicit Rosé Pine shades)
+// ──────────────────────────────────────────────
+$rose-pine-palette: (
+  // Primary — Rose / Love
+  'primary': (
+    '50':  #fce4ec,  '50-contrast':  adaptive-contrast(#fce4ec),  '50-raw':  #fce4ec,
+    '100': #f8bbd0,  '100-contrast': adaptive-contrast(#f8bbd0),  '100-raw': #f8bbd0,
+    '200': #f48fb1,  '200-contrast': adaptive-contrast(#f48fb1),  '200-raw': #f48fb1,
+    '300': #f06292,  '300-contrast': adaptive-contrast(#f06292),  '300-raw': #f06292,
+    '400': #ec407a,  '400-contrast': adaptive-contrast(#ec407a),  '400-raw': #ec407a,
+    '500': $rp-love, '500-contrast': adaptive-contrast($rp-love), '500-raw': $rp-love,
+    '600': #d4637f,  '600-contrast': adaptive-contrast(#d4637f),  '600-raw': #d4637f,
+    '700': #b5506b,  '700-contrast': adaptive-contrast(#b5506b),  '700-raw': #b5506b,
+    '800': #953e57,  '800-contrast': adaptive-contrast(#953e57),  '800-raw': #953e57,
+    '900': #6e2b40,  '900-contrast': adaptive-contrast(#6e2b40),  '900-raw': #6e2b40,
+    'A100': #ff80ab,  'A100-contrast': adaptive-contrast(#ff80ab),  'A100-raw': #ff80ab,
+    'A200': #ff4081,  'A200-contrast': adaptive-contrast(#ff4081),  'A200-raw': #ff4081,
+    'A400': #f50057,  'A400-contrast': adaptive-contrast(#f50057),  'A400-raw': #f50057,
+    'A700': #c51162,  'A700-contrast': adaptive-contrast(#c51162),  'A700-raw': #c51162,
+  ),
+  // Secondary — Iris
+  'secondary': (
+    '50':  #f3edf9,  '50-contrast':  adaptive-contrast(#f3edf9),  '50-raw':  #f3edf9,
+    '100': #e4d5f2,  '100-contrast': adaptive-contrast(#e4d5f2),  '100-raw': #e4d5f2,
+    '200': #d4bce9,  '200-contrast': adaptive-contrast(#d4bce9),  '200-raw': #d4bce9,
+    '300': $rp-iris, '300-contrast': adaptive-contrast($rp-iris), '300-raw': $rp-iris,
+    '400': #b794e0,  '400-contrast': adaptive-contrast(#b794e0),  '400-raw': #b794e0,
+    '500': #a982d9,  '500-contrast': adaptive-contrast(#a982d9),  '500-raw': #a982d9,
+    '600': #9670c4,  '600-contrast': adaptive-contrast(#9670c4),  '600-raw': #9670c4,
+    '700': #7f5caa,  '700-contrast': adaptive-contrast(#7f5caa),  '700-raw': #7f5caa,
+    '800': #694990,  '800-contrast': adaptive-contrast(#694990),  '800-raw': #694990,
+    '900': #4e3570,  '900-contrast': adaptive-contrast(#4e3570),  '900-raw': #4e3570,
+    'A100': #e1d0f5,  'A100-contrast': adaptive-contrast(#e1d0f5),  'A100-raw': #e1d0f5,
+    'A200': $rp-iris, 'A200-contrast': adaptive-contrast($rp-iris), 'A200-raw': $rp-iris,
+    'A400': #a67edb,  'A400-contrast': adaptive-contrast(#a67edb),  'A400-raw': #a67edb,
+    'A700': #8b5cc9,  'A700-contrast': adaptive-contrast(#8b5cc9),  'A700-raw': #8b5cc9,
+  ),
+  // Surface — deep purple base
+  'surface': (
+    '50':  #f0eff4,     '50-contrast':  adaptive-contrast(#f0eff4),     '50-raw':  #f0eff4,
+    '100': #d4d2e0,     '100-contrast': adaptive-contrast(#d4d2e0),     '100-raw': #d4d2e0,
+    '200': #b8b5cc,     '200-contrast': adaptive-contrast(#b8b5cc),     '200-raw': #b8b5cc,
+    '300': $rp-subtle,  '300-contrast': adaptive-contrast($rp-subtle),  '300-raw': $rp-subtle,
+    '400': $rp-muted,   '400-contrast': adaptive-contrast($rp-muted),   '400-raw': $rp-muted,
+    '500': $rp-surface, '500-contrast': adaptive-contrast($rp-surface), '500-raw': $rp-surface,
+    '600': #1c1a2a,     '600-contrast': adaptive-contrast(#1c1a2a),     '600-raw': #1c1a2a,
+    '700': $rp-base,    '700-contrast': adaptive-contrast($rp-base),    '700-raw': $rp-base,
+    '800': #15131e,     '800-contrast': adaptive-contrast(#15131e),     '800-raw': #15131e,
+    '900': #110f18,     '900-contrast': adaptive-contrast(#110f18),     '900-raw': #110f18,
+    'A100': $rp-text,   'A100-contrast': adaptive-contrast($rp-text),   'A100-raw': $rp-text,
+    'A200': #c4c1de,    'A200-contrast': adaptive-contrast(#c4c1de),    'A200-raw': #c4c1de,
+    'A400': $rp-subtle, 'A400-contrast': adaptive-contrast($rp-subtle), 'A400-raw': $rp-subtle,
+    'A700': $rp-muted,  'A700-contrast': adaptive-contrast($rp-muted),  'A700-raw': $rp-muted,
+  ),
+  // Gray — dark-inverted (50=darkest, 900=lightest for dark themes)
+  'gray': (
+    '50':  $rp-base,    '50-contrast':  adaptive-contrast($rp-base),    '50-raw':  $rp-base,
+    '100': $rp-surface,  '100-contrast': adaptive-contrast($rp-surface),  '100-raw': $rp-surface,
+    '200': $rp-overlay,  '200-contrast': adaptive-contrast($rp-overlay),  '200-raw': $rp-overlay,
+    '300': $rp-highlight-med, '300-contrast': adaptive-contrast($rp-highlight-med), '300-raw': $rp-highlight-med,
+    '400': $rp-highlight-high, '400-contrast': adaptive-contrast($rp-highlight-high), '400-raw': $rp-highlight-high,
+    '500': $rp-muted,    '500-contrast': adaptive-contrast($rp-muted),    '500-raw': $rp-muted,
+    '600': $rp-subtle,   '600-contrast': adaptive-contrast($rp-subtle),   '600-raw': $rp-subtle,
+    '700': #b8b5cc,      '700-contrast': adaptive-contrast(#b8b5cc),      '700-raw': #b8b5cc,
+    '800': #d4d2e0,      '800-contrast': adaptive-contrast(#d4d2e0),      '800-raw': #d4d2e0,
+    '900': $rp-text,     '900-contrast': adaptive-contrast($rp-text),     '900-raw': $rp-text,
+  ),
+  // Info — Pine / Foam
+  'info': (
+    '50':  #e6f2f5,  '50-contrast':  adaptive-contrast(#e6f2f5),  '50-raw':  #e6f2f5,
+    '100': #c2e0e8,  '100-contrast': adaptive-contrast(#c2e0e8),  '100-raw': #c2e0e8,
+    '200': $rp-foam, '200-contrast': adaptive-contrast($rp-foam), '200-raw': $rp-foam,
+    '300': #75bdc9,  '300-contrast': adaptive-contrast(#75bdc9),  '300-raw': #75bdc9,
+    '400': #53a9b8,  '400-contrast': adaptive-contrast(#53a9b8),  '400-raw': #53a9b8,
+    '500': $rp-pine, '500-contrast': adaptive-contrast($rp-pine), '500-raw': $rp-pine,
+    '600': #2a6580,  '600-contrast': adaptive-contrast(#2a6580),  '600-raw': #2a6580,
+    '700': #22546b,  '700-contrast': adaptive-contrast(#22546b),  '700-raw': #22546b,
+    '800': #1b4356,  '800-contrast': adaptive-contrast(#1b4356),  '800-raw': #1b4356,
+    '900': #133140,  '900-contrast': adaptive-contrast(#133140),  '900-raw': #133140,
+    'A100': #b0e4ef,  'A100-contrast': adaptive-contrast(#b0e4ef),  'A100-raw': #b0e4ef,
+    'A200': #7dd4e4,  'A200-contrast': adaptive-contrast(#7dd4e4),  'A200-raw': #7dd4e4,
+    'A400': #4abdd2,  'A400-contrast': adaptive-contrast(#4abdd2),  'A400-raw': #4abdd2,
+    'A700': #2a97b0,  'A700-contrast': adaptive-contrast(#2a97b0),  'A700-raw': #2a97b0,
+  ),
+  // Success — muted green with Rosé Pine warmth
+  'success': (
+    '50':  #e8f5ec,  '50-contrast':  adaptive-contrast(#e8f5ec),  '50-raw':  #e8f5ec,
+    '100': #c8e6cf,  '100-contrast': adaptive-contrast(#c8e6cf),  '100-raw': #c8e6cf,
+    '200': #a5d6b0,  '200-contrast': adaptive-contrast(#a5d6b0),  '200-raw': #a5d6b0,
+    '300': #81c791,  '300-contrast': adaptive-contrast(#81c791),  '300-raw': #81c791,
+    '400': #66bb79,  '400-contrast': adaptive-contrast(#66bb79),  '400-raw': #66bb79,
+    '500': #56b68c,  '500-contrast': adaptive-contrast(#56b68c),  '500-raw': #56b68c,
+    '600': #4a9e7a,  '600-contrast': adaptive-contrast(#4a9e7a),  '600-raw': #4a9e7a,
+    '700': #3d8568,  '700-contrast': adaptive-contrast(#3d8568),  '700-raw': #3d8568,
+    '800': #316c56,  '800-contrast': adaptive-contrast(#316c56),  '800-raw': #316c56,
+    '900': #245340,  '900-contrast': adaptive-contrast(#245340),  '900-raw': #245340,
+    'A100': #b9f6ca,  'A100-contrast': adaptive-contrast(#b9f6ca),  'A100-raw': #b9f6ca,
+    'A200': #69f0ae,  'A200-contrast': adaptive-contrast(#69f0ae),  'A200-raw': #69f0ae,
+    'A400': #00e676,  'A400-contrast': adaptive-contrast(#00e676),  'A400-raw': #00e676,
+    'A700': #00c853,  'A700-contrast': adaptive-contrast(#00c853),  'A700-raw': #00c853,
+  ),
+  // Warn — Gold
+  'warn': (
+    '50':  #fef4e6,   '50-contrast':  adaptive-contrast(#fef4e6),   '50-raw':  #fef4e6,
+    '100': #fce3bf,   '100-contrast': adaptive-contrast(#fce3bf),   '100-raw': #fce3bf,
+    '200': #f9d199,   '200-contrast': adaptive-contrast(#f9d199),   '200-raw': #f9d199,
+    '300': $rp-gold,  '300-contrast': adaptive-contrast($rp-gold),  '300-raw': $rp-gold,
+    '400': #f3b05a,   '400-contrast': adaptive-contrast(#f3b05a),   '400-raw': #f3b05a,
+    '500': #f0a03e,   '500-contrast': adaptive-contrast(#f0a03e),   '500-raw': #f0a03e,
+    '600': #d98d36,   '600-contrast': adaptive-contrast(#d98d36),   '600-raw': #d98d36,
+    '700': #b5752d,   '700-contrast': adaptive-contrast(#b5752d),   '700-raw': #b5752d,
+    '800': #915d24,   '800-contrast': adaptive-contrast(#915d24),   '800-raw': #915d24,
+    '900': #6d461b,   '900-contrast': adaptive-contrast(#6d461b),   '900-raw': #6d461b,
+    'A100': #ffe0b2,   'A100-contrast': adaptive-contrast(#ffe0b2),   'A100-raw': #ffe0b2,
+    'A200': #ffcc80,   'A200-contrast': adaptive-contrast(#ffcc80),   'A200-raw': #ffcc80,
+    'A400': #ffa726,   'A400-contrast': adaptive-contrast(#ffa726),   'A400-raw': #ffa726,
+    'A700': #ff8f00,   'A700-contrast': adaptive-contrast(#ff8f00),   'A700-raw': #ff8f00,
+  ),
+  // Error — Love (same rose hue as primary, intentional in Rosé Pine)
+  'error': (
+    '50':  #fce4ec,  '50-contrast':  adaptive-contrast(#fce4ec),  '50-raw':  #fce4ec,
+    '100': #f8bbd0,  '100-contrast': adaptive-contrast(#f8bbd0),  '100-raw': #f8bbd0,
+    '200': #f48fb1,  '200-contrast': adaptive-contrast(#f48fb1),  '200-raw': #f48fb1,
+    '300': #f06292,  '300-contrast': adaptive-contrast(#f06292),  '300-raw': #f06292,
+    '400': #ec407a,  '400-contrast': adaptive-contrast(#ec407a),  '400-raw': #ec407a,
+    '500': $rp-love, '500-contrast': adaptive-contrast($rp-love), '500-raw': $rp-love,
+    '600': #d4637f,  '600-contrast': adaptive-contrast(#d4637f),  '600-raw': #d4637f,
+    '700': #b5506b,  '700-contrast': adaptive-contrast(#b5506b),  '700-raw': #b5506b,
+    '800': #953e57,  '800-contrast': adaptive-contrast(#953e57),  '800-raw': #953e57,
+    '900': #6e2b40,  '900-contrast': adaptive-contrast(#6e2b40),  '900-raw': #6e2b40,
+    'A100': #ff80ab,  'A100-contrast': adaptive-contrast(#ff80ab),  'A100-raw': #ff80ab,
+    'A200': #ff4081,  'A200-contrast': adaptive-contrast(#ff4081),  'A200-raw': #ff4081,
+    'A400': #f50057,  'A400-contrast': adaptive-contrast(#f50057),  'A400-raw': #f50057,
+    'A700': #c51162,  'A700-contrast': adaptive-contrast(#c51162),  'A700-raw': #c51162,
+  ),
+  '_meta': (
+    'variant': dark
+  )
 );
 
 // ──────────────────────────────────────────────
@@ -19,30 +171,45 @@ $erp-theme-palette: palette(
 @include core();
 
 @include typography(
-  $font-family: '"Roboto", "Helvetica Neue", sans-serif',
+  $font-family: '"JetBrains Mono", "Fira Code", "Cascadia Code", monospace',
   $type-scale: $material-type-scale
 );
 
-@include theme($palette: $erp-theme-palette, $schema: $light-material-schema);
+@include palette($rose-pine-palette);
+@include theme($palette: $rose-pine-palette, $schema: $dark-fluent-schema);
 
 // ──────────────────────────────────────────────
 // Nav-drawer component theme
 // ──────────────────────────────────────────────
 $erp-navdrawer-theme: navdrawer-theme(
-  $background: var(--ig-primary-900),
-  $item-text-color: hsl(from var(--ig-surface-500) h s l / 0.85),
-  $item-icon-color: hsl(from var(--ig-surface-500) h s l / 0.7),
-  $item-header-text-color: hsl(from var(--ig-surface-500) h s l / 0.5),
-  $item-hover-background: hsl(from var(--ig-surface-500) h s l / 0.08),
-  $item-hover-text-color: var(--ig-surface-500),
-  $item-hover-icon-color: var(--ig-surface-500),
-  $item-active-background: var(--ig-primary-500),
-  $item-active-text-color: var(--ig-surface-500),
-  $item-active-icon-color: var(--ig-surface-500),
+  $background: $rp-base,
+  $item-text-color: hsl(from var(--ig-gray-700) h s l / 0.85),
+  $item-icon-color: hsl(from var(--ig-gray-600) h s l / 0.7),
+  $item-header-text-color: $rp-muted,
+  $item-hover-background: $rp-highlight-low,
+  $item-hover-text-color: $rp-text,
+  $item-hover-icon-color: $rp-text,
+  $item-active-background: hsl(from $rp-love h s l / 0.15),
+  $item-active-text-color: $rp-love,
+  $item-active-icon-color: $rp-love,
   $item-border-radius: 0 24px 24px 0,
 );
 
 @include css-vars($erp-navdrawer-theme);
+
+// ──────────────────────────────────────────────
+// Grid header component theme
+// ──────────────────────────────────────────────
+$erp-grid-theme: grid-theme(
+  $schema: $dark-fluent-schema,
+  $header-background: $rp-overlay,
+  $header-text-color: $rp-text,
+  $sorted-header-icon-color: $rp-love,
+);
+
+igx-grid {
+  @include tokens($erp-grid-theme);
+}
 
 // ──────────────────────────────────────────────
 // Global reset
@@ -56,7 +223,7 @@ $erp-navdrawer-theme: navdrawer-theme(
 html,
 body {
   height: 100%;
-  background-color: var(--ig-gray-100);
+  background-color: $rp-base;
 }
 
 // ──────────────────────────────────────────────
@@ -78,7 +245,7 @@ body {
     flex: 1;
     overflow-y: auto;
     padding: 24px;
-    background: var(--ig-gray-100);
+    background: $rp-base;
   }
 }
 
@@ -88,13 +255,17 @@ body {
 .app-navbar {
   flex-shrink: 0;
   z-index: 100;
-  --igx-navbar-background: var(--ig-primary-500);
-  --igx-navbar-title-text-color: var(--ig-primary-500-contrast);
-  --igx-navbar-idle-icon-color: var(--ig-primary-500-contrast);
+  --igx-navbar-background: #{$rp-surface};
+  --igx-navbar-title-text-color: #{$rp-text};
+  --igx-navbar-idle-icon-color: #{$rp-subtle};
 
   igx-icon {
-    color: var(--ig-primary-500-contrast);
+    color: $rp-subtle;
     cursor: pointer;
+
+    &:hover {
+      color: $rp-text;
+    }
   }
 }
 
@@ -104,7 +275,7 @@ igx-nav-drawer {
 
 .erp-nav-header {
   padding: 16px 20px 8px;
-  color: hsl(from var(--ig-surface-500) h s l / 0.7);
+  color: $rp-muted;
   font-size: var(--ig-overline-font-size);
   font-weight: 600;
   letter-spacing: var(--ig-overline-letter-spacing);
@@ -126,13 +297,13 @@ igx-nav-drawer {
     h1 {
       font-size: var(--ig-h5-font-size);
       font-weight: var(--ig-h5-font-weight);
-      color: var(--ig-gray-900);
+      color: $rp-text;
     }
   }
 }
 
 // ──────────────────────────────────────────────
-// Status chips
+// Status chips (dark-aware backgrounds)
 // ──────────────────────────────────────────────
 .status-chip {
   display: inline-flex;
@@ -144,44 +315,44 @@ igx-nav-drawer {
   white-space: nowrap;
 
   &.pending {
-    background: var(--ig-warn-50);
-    color: var(--ig-secondary-500);
+    background: hsl(from $rp-gold h s l / 0.15);
+    color: $rp-gold;
   }
   &.in-production {
-    background: var(--ig-primary-50);
-    color: var(--ig-primary-500);
+    background: hsl(from $rp-love h s l / 0.15);
+    color: $rp-love;
   }
   &.ready {
-    background: var(--ig-info-50);
-    color: var(--ig-info-500);
+    background: hsl(from $rp-foam h s l / 0.15);
+    color: $rp-foam;
   }
   &.shipped {
-    background: var(--ig-info-50);
-    color: var(--ig-info-500);
+    background: hsl(from $rp-pine h s l / 0.15);
+    color: $rp-foam;
   }
   &.delivered {
-    background: var(--ig-success-50);
+    background: hsl(from $rp-foam h s l / 0.12);
     color: var(--ig-success-500);
   }
   &.cancelled {
-    background: var(--ig-gray-100);
-    color: var(--ig-gray-500);
+    background: $rp-highlight-low;
+    color: $rp-muted;
   }
   &.confirmed {
-    background: var(--ig-success-50);
+    background: hsl(from $rp-foam h s l / 0.12);
     color: var(--ig-success-500);
   }
   &.in-transit {
-    background: var(--ig-info-50);
-    color: var(--ig-info-500);
+    background: hsl(from $rp-pine h s l / 0.15);
+    color: $rp-foam;
   }
   &.active {
-    background: var(--ig-success-50);
+    background: hsl(from $rp-foam h s l / 0.12);
     color: var(--ig-success-500);
   }
   &.inactive {
-    background: var(--ig-gray-100);
-    color: var(--ig-gray-400);
+    background: $rp-highlight-low;
+    color: $rp-muted;
   }
 }
 
@@ -189,26 +360,33 @@ igx-nav-drawer {
 // Alert cards
 // ──────────────────────────────────────────────
 .alert-card {
+  @include sizable();
+
+  --ig-radius-factor: 0;
+  --ig-size: 3;
+  --component-size: var(--ig-size, var(--ig-size-medium));
+
   display: flex;
   align-items: flex-start;
-  padding: 12px 16px;
-  border-radius: 8px;
-  gap: 12px;
-  margin-bottom: 8px;
+  padding-inline: pad-inline(4px, 16px, 32px);
+  padding-block: pad-block(4px, 12px, 24px);
+  border-radius: border-radius(8px, 0px, 16px);
+  gap: #{sizable(4px, 12px, 24px)};
+  margin-bottom: #{sizable(2px, 8px, 20px)};
 
   &.warning {
-    background: var(--ig-warn-50);
-    border-left: 4px solid var(--ig-warn-500);
+    background: hsl(from $rp-gold h s l / 0.1);
+    border-left: 4px solid $rp-gold;
     igx-icon {
-      color: var(--ig-warn-500);
+      color: $rp-gold;
     }
   }
 
   &.error {
-    background: var(--ig-error-50);
-    border-left: 4px solid var(--ig-error-500);
+    background: hsl(from $rp-love h s l / 0.1);
+    border-left: 4px solid $rp-love;
     igx-icon {
-      color: var(--ig-error-500);
+      color: $rp-love;
     }
   }
 
@@ -216,13 +394,13 @@ igx-nav-drawer {
     flex: 1;
     .alert-message {
       font-size: var(--ig-body-2-font-size);
-      color: var(--ig-gray-900);
+      color: $rp-text;
       line-height: 1.4;
     }
     .alert-date {
       font-size: var(--ig-caption-font-size);
-      color: var(--ig-gray-500);
-      margin-top: 2px;
+      color: $rp-subtle;
+      margin-top: #{sizable(0px, 2px, 8px)};
     }
   }
 }
@@ -231,17 +409,17 @@ igx-nav-drawer {
 // KPI cards
 // ──────────────────────────────────────────────
 .kpi-card {
-  background: var(--ig-surface-500);
+  background: $rp-surface;
   border-radius: 12px;
   padding: 20px 24px;
-  box-shadow: 0 2px 8px hsl(from var(--ig-gray-900) h s l / 0.08);
+  box-shadow: 0 2px 8px hsl(from $rp-base h s l / 0.4);
   display: flex;
   flex-direction: column;
   gap: 4px;
 
   .kpi-label {
     font-size: var(--ig-caption-font-size);
-    color: var(--ig-gray-500);
+    color: $rp-subtle;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -249,18 +427,18 @@ igx-nav-drawer {
   .kpi-value {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--ig-gray-900);
+    color: $rp-text;
     line-height: 1.2;
   }
   .kpi-sub {
     font-size: var(--ig-caption-font-size);
-    color: var(--ig-gray-500);
+    color: $rp-muted;
   }
   &.warning .kpi-value {
-    color: var(--ig-secondary-500);
+    color: $rp-gold;
   }
   &.error .kpi-value {
-    color: var(--ig-error-500);
+    color: $rp-love;
   }
   &.success .kpi-value {
     color: var(--ig-success-500);
@@ -271,15 +449,15 @@ igx-nav-drawer {
 // Section cards
 // ──────────────────────────────────────────────
 .section-card {
-  background: var(--ig-surface-500);
+  background: $rp-surface;
   border-radius: 12px;
   padding: 20px 24px;
-  box-shadow: 0 2px 8px hsl(from var(--ig-gray-900) h s l / 0.08);
+  box-shadow: 0 2px 8px hsl(from $rp-base h s l / 0.4);
 
   &__title {
     font-size: var(--ig-subtitle-1-font-size);
     font-weight: 600;
-    color: var(--ig-gray-900);
+    color: $rp-text;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
@@ -304,15 +482,15 @@ igx-nav-drawer {
 }
 
 // ──────────────────────────────────────────────
-// Conditional row highlights
+// Conditional row highlights (dark-aware)
 // ──────────────────────────────────────────────
 .delayed-row {
-  background-color: var(--ig-error-50) !important;
-  color: var(--ig-error-900);
+  background-color: hsl(from $rp-love h s l / 0.1) !important;
+  color: $rp-love;
 }
 
 .low-stock-row {
-  background-color: var(--ig-warn-50) !important;
+  background-color: hsl(from $rp-gold h s l / 0.1) !important;
 }
 
 // ──────────────────────────────────────────────
