@@ -1,11 +1,11 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { IGX_NAVIGATION_DRAWER_DIRECTIVES, IgxNavigationDrawerComponent } from 'igniteui-angular/navigation-drawer';
-import { IgxIconComponent } from 'igniteui-angular/icon';
-import { IgxBadgeComponent } from 'igniteui-angular/badge';
-import { IgxRippleDirective } from 'igniteui-angular/directives';
-import { IGX_NAVBAR_DIRECTIVES } from 'igniteui-angular/navbar';
+import { IGX_NAVIGATION_DRAWER_DIRECTIVES, IgxNavigationDrawerComponent } from '@infragistics/igniteui-angular/navigation-drawer';
+import { IgxIconComponent } from '@infragistics/igniteui-angular/icon';
+import { IgxBadgeComponent } from '@infragistics/igniteui-angular/badge';
+import { IgxRippleDirective } from '@infragistics/igniteui-angular/directives';
+import { IGX_NAVBAR_DIRECTIVES } from '@infragistics/igniteui-angular/navbar';
 import { ErpDataService } from './services/erp-data.service';
 
 @Component({
