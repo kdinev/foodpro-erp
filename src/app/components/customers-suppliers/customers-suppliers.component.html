@@ -1,13 +1,13 @@
 <div class="erp-page">
   <div class="erp-page__header">
-    <h1 style="display:flex;align-items:center;gap:10px">
-      <igx-icon style="font-size:28px;color:#1565C0">people</igx-icon>
+    <h1 class="page-title">
+      <igx-icon class="page-title__icon">people</igx-icon>
       Customers &amp; Suppliers
     </h1>
   </div>
 
   <igx-tabs>
-    <!-- ═══════════ CUSTOMERS TAB ═══════════ -->
+    <!-- CUSTOMERS TAB -->
     <igx-tab-item>
       <igx-tab-header>
         <igx-icon igxTabHeaderIcon>person</igx-icon>
@@ -15,8 +15,8 @@
       </igx-tab-header>
       <igx-tab-content>
         <div class="grid-toolbar">
-          <span style="font-size:14px;color:#757575">Manage your customer accounts</span>
-          <button igxButton="raised" igxRipple (click)="openAddCustomer()" style="color:white;background:#1565C0">
+          <span class="toolbar-hint">Manage your customer accounts</span>
+          <button igxButton="raised" igxRipple (click)="openAddCustomer()" class="btn-primary">
             <igx-icon>add</igx-icon> Add Customer
           </button>
         </div>
@@ -39,10 +39,10 @@
           <igx-column header="Actions" [filterable]="false" [sortable]="false" width="88px" [pinned]="true">
             <ng-template igxCell let-cell="cell">
               <button igxIconButton="flat" igxRipple (click)="openEditCustomer(cell.row.data)" title="Edit">
-                <igx-icon style="color:#1565C0">edit</igx-icon>
+                <igx-icon class="icon-primary">edit</igx-icon>
               </button>
               <button igxIconButton="flat" igxRipple (click)="promptDeleteCustomer(cell.row.data.id)" title="Delete">
-                <igx-icon style="color:#D32F2F">delete</igx-icon>
+                <igx-icon class="icon-danger">delete</igx-icon>
               </button>
             </ng-template>
           </igx-column>
@@ -50,7 +50,7 @@
       </igx-tab-content>
     </igx-tab-item>
 
-    <!-- ═══════════ SUPPLIERS TAB ═══════════ -->
+    <!-- SUPPLIERS TAB -->
     <igx-tab-item>
       <igx-tab-header>
         <igx-icon igxTabHeaderIcon>local_shipping</igx-icon>
@@ -58,8 +58,8 @@
       </igx-tab-header>
       <igx-tab-content>
         <div class="grid-toolbar">
-          <span style="font-size:14px;color:#757575">Manage your ingredient suppliers</span>
-          <button igxButton="raised" igxRipple (click)="openAddSupplier()" style="color:white;background:#1565C0">
+          <span class="toolbar-hint">Manage your ingredient suppliers</span>
+          <button igxButton="raised" igxRipple (click)="openAddSupplier()" class="btn-primary">
             <igx-icon>add</igx-icon> Add Supplier
           </button>
         </div>
@@ -78,16 +78,16 @@
           </igx-column>
           <igx-column header="Supplies" [filterable]="false" [sortable]="false" minWidth="200px">
             <ng-template igxCell let-cell="cell">
-              <span style="font-size:12px;color:#616161">{{ getIngredientNamesForSupplier(cell.row.data.ingredientIds) }}</span>
+              <span class="supplies-text">{{ getIngredientNamesForSupplier(cell.row.data.ingredientIds) }}</span>
             </ng-template>
           </igx-column>
           <igx-column header="Actions" [filterable]="false" [sortable]="false" width="88px">
             <ng-template igxCell let-cell="cell">
               <button igxIconButton="flat" igxRipple (click)="openEditSupplier(cell.row.data)" title="Edit">
-                <igx-icon style="color:#1565C0">edit</igx-icon>
+                <igx-icon class="icon-primary">edit</igx-icon>
               </button>
               <button igxIconButton="flat" igxRipple (click)="promptDeleteSupplier(cell.row.data.id)" title="Delete">
-                <igx-icon style="color:#D32F2F">delete</igx-icon>
+                <igx-icon class="icon-danger">delete</igx-icon>
               </button>
             </ng-template>
           </igx-column>
@@ -97,7 +97,7 @@
   </igx-tabs>
 </div>
 
-<!-- ═══════════ Customer Add/Edit Dialog ═══════════ -->
+<!-- Customer Add/Edit Dialog -->
 <igx-dialog #customerDialog [isModal]="true" [closeOnEscape]="true">
   <div class="dialog-wrapper">
     <h2 class="dialog-title">{{ dialogTitle() }}</h2>
@@ -132,7 +132,7 @@
           <input igxInput formControlName="city" type="text" />
         </igx-input-group>
       </div>
-      <igx-input-group type="border" style="width:100%">
+      <igx-input-group type="border" class="input-full-width">
         <label igxLabel>Address</label>
         <input igxInput formControlName="address" type="text" />
       </igx-input-group>
@@ -151,14 +151,14 @@
       <button igxButton="flat" igxRipple (click)="customerDialog.close()">Cancel</button>
       <button igxButton="raised" igxRipple (click)="saveCustomer()"
         [disabled]="customerForm.invalid"
-        style="background:#1565C0;color:white">
+        class="btn-primary">
         Save
       </button>
     </div>
   </div>
 </igx-dialog>
 
-<!-- ═══════════ Supplier Add/Edit Dialog ═══════════ -->
+<!-- Supplier Add/Edit Dialog -->
 <igx-dialog #supplierDialog [isModal]="true" [closeOnEscape]="true">
   <div class="dialog-wrapper">
     <h2 class="dialog-title">{{ dialogTitle() }}</h2>
@@ -193,7 +193,7 @@
           <input igxInput formControlName="city" type="text" />
         </igx-input-group>
       </div>
-      <igx-input-group type="border" style="width:100%">
+      <igx-input-group type="border" class="input-full-width">
         <label igxLabel>Address</label>
         <input igxInput formControlName="address" type="text" />
       </igx-input-group>
@@ -212,27 +212,27 @@
       <button igxButton="flat" igxRipple (click)="supplierDialog.close()">Cancel</button>
       <button igxButton="raised" igxRipple (click)="saveSupplier()"
         [disabled]="supplierForm.invalid"
-        style="background:#1565C0;color:white">
+        class="btn-primary">
         Save
       </button>
     </div>
   </div>
 </igx-dialog>
 
-<!-- ═══════════ Confirm Delete Dialog ═══════════ -->
+<!-- Confirm Delete Dialog -->
 <igx-dialog #confirmDialog [isModal]="true" [closeOnEscape]="true">
-  <div class="dialog-wrapper" style="max-width:400px">
-    <h2 class="dialog-title" style="color:#D32F2F">
-      <igx-icon style="vertical-align:middle;margin-right:8px">warning</igx-icon>
+  <div class="dialog-wrapper dialog-wrapper--narrow">
+    <h2 class="dialog-title dialog-title--danger">
+      <igx-icon class="dialog-title__icon">warning</igx-icon>
       Confirm Delete
     </h2>
-    <p style="margin-bottom:24px;color:#424242">
+    <p class="confirm-message">
       Are you sure you want to delete this record? This action cannot be undone.
     </p>
     <div class="dialog-actions">
       <button igxButton="flat" igxRipple (click)="confirmDialog.close()">Cancel</button>
       <button igxButton="raised" igxRipple (click)="confirmDelete()"
-        style="background:#D32F2F;color:white">
+        class="btn-danger">
         Delete
       </button>
     </div>

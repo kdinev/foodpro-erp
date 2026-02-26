@@ -1,10 +1,77 @@
+// ──────────────────────────────────────────────
+// Page title
+// ──────────────────────────────────────────────
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__icon {
+    font-size: 28px;
+    color: var(--ig-primary-500);
+  }
+}
+
+.tab-content-padded {
+  padding-top: 16px;
+}
+
+// ──────────────────────────────────────────────
+// Stock values
+// ──────────────────────────────────────────────
+.stock-value {
+  font-weight: 600;
+}
+
+.stock-unit {
+  color: var(--ig-gray-400);
+  margin-left: 4px;
+  font-size: var(--ig-caption-font-size);
+}
+
+.reserved-value {
+  color: var(--ig-secondary-500);
+  font-weight: 500;
+}
+
+.free-stock-value {
+  font-weight: 700;
+
+  &--zero { color: var(--ig-error-500); }
+  &--ok   { color: var(--ig-success-500); }
+}
+
+.zero-free-badge {
+  margin-left: 6px;
+  font-size: var(--ig-overline-font-size);
+}
+
+// ──────────────────────────────────────────────
+// Stock cell (bar + value)
+// ──────────────────────────────────────────────
 .stock-cell {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 2px 0;
+
+  &__value {
+    font-weight: 600;
+    min-width: 60px;
+
+    &--low { color: var(--ig-error-500); }
+    &--ok  { color: var(--ig-success-500); }
+  }
+
+  &__bar {
+    flex: 1;
+    min-width: 80px;
+  }
 }
 
+// ──────────────────────────────────────────────
+// Ingredient chips
+// ──────────────────────────────────────────────
 .ing-chips {
   display: flex;
   flex-wrap: wrap;
@@ -13,27 +80,92 @@
 }
 
 .ing-chip {
-  background: #E3F2FD;
-  color: #1565C0;
+  background: var(--ig-primary-50);
+  color: var(--ig-primary-500);
   border-radius: 10px;
   padding: 2px 8px;
-  font-size: 11px;
+  font-size: var(--ig-overline-font-size);
   white-space: nowrap;
 
   &--more {
-    background: #f0f0f0;
-    color: #616161;
+    background: var(--ig-gray-100);
+    color: var(--ig-gray-600);
   }
 }
 
 .free-zero td {
-  background-color: #FFEBEE !important;
+  background-color: var(--ig-error-50) !important;
 }
 
+.status-icon--sm {
+  font-size: var(--ig-caption-font-size);
+  vertical-align: middle;
+}
+
+.supplier-chip {
+  font-size: var(--ig-overline-font-size);
+}
+
+// ──────────────────────────────────────────────
+// Icon helpers
+// ──────────────────────────────────────────────
+.icon-primary   { color: var(--ig-primary-500); }
+.icon-secondary { color: var(--ig-secondary-500); }
+.icon-danger    { color: var(--ig-error-500); }
+
+.due-date--delayed {
+  color: var(--ig-error-500);
+  font-weight: 700;
+}
+
+// ──────────────────────────────────────────────
+// Grid toolbar
+// ──────────────────────────────────────────────
+.grid-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  &--padded {
+    padding-top: 16px;
+  }
+}
+
+.toolbar-hint {
+  font-size: var(--ig-body-2-font-size);
+  color: var(--ig-gray-500);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+// ──────────────────────────────────────────────
+// Button helpers
+// ──────────────────────────────────────────────
+.btn-primary {
+  background: var(--ig-primary-500);
+  color: var(--ig-primary-500-contrast);
+}
+
+.btn-secondary {
+  background: var(--ig-secondary-500);
+  color: var(--ig-secondary-500-contrast);
+}
+
+// ──────────────────────────────────────────────
+// Dialog
+// ──────────────────────────────────────────────
 .dialog-wrapper {
   padding: 24px;
   min-width: 480px;
   max-width: 700px;
+
+  &--add-ing {
+    min-width: 440px;
+  }
 }
 
 .order-dialog {
@@ -41,12 +173,16 @@
 }
 
 .dialog-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #212121;
+  font-size: var(--ig-h6-font-size);
+  font-weight: var(--ig-h6-font-weight);
+  color: var(--ig-gray-900);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+
+  &__icon {
+    margin-right: 8px;
+  }
 }
 
 .dialog-form {
@@ -65,18 +201,34 @@
   }
 }
 
+.input-half-width {
+  width: 50%;
+}
+
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--ig-gray-200);
 }
 
+.order-ingredient-select {
+  margin-bottom: 20px;
+}
+
+.low-stock-label {
+  color: var(--ig-error-500);
+  font-size: var(--ig-overline-font-size);
+}
+
+// ──────────────────────────────────────────────
+// Split-order section
+// ──────────────────────────────────────────────
 .split-section {
-  background: #F8F9FA;
-  border: 1px solid #e0e0e0;
+  background: var(--ig-gray-50);
+  border: 1px solid var(--ig-gray-200);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 8px;
@@ -87,8 +239,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  font-size: 14px;
-  color: #424242;
+  font-size: var(--ig-body-2-font-size);
+  color: var(--ig-gray-700);
+
+  &__unit {
+    font-size: var(--ig-caption-font-size);
+    color: var(--ig-gray-500);
+  }
 }
 
 .split-row {
@@ -98,13 +255,13 @@
   padding: 10px 12px;
   border-radius: 6px;
   margin-bottom: 6px;
-  border: 1px solid #e0e0e0;
-  background: white;
+  border: 1px solid var(--ig-gray-200);
+  background: var(--ig-surface-500);
   transition: background 0.15s;
 
   &--selected {
-    border-color: #1565C0;
-    background: #E3F2FD;
+    border-color: var(--ig-primary-500);
+    background: var(--ig-primary-50);
   }
 }
 
@@ -124,8 +281,8 @@
 
 .split-supplier {
   font-weight: 500;
-  font-size: 14px;
-  color: #212121;
+  font-size: var(--ig-body-2-font-size);
+  color: var(--ig-gray-900);
 }
 
 .split-details {
@@ -135,23 +292,53 @@
   flex: 1;
 }
 
+.split-qty-input {
+  width: 140px;
+}
+
 .split-meta {
   display: flex;
   flex-direction: column;
-  font-size: 12px;
-  color: #757575;
+  font-size: var(--ig-caption-font-size);
+  color: var(--ig-gray-500);
   gap: 2px;
 }
 
+// ──────────────────────────────────────────────
+// Order summary
+// ──────────────────────────────────────────────
 .order-summary {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  background: #E8F5E9;
+  background: var(--ig-success-50);
   border-radius: 6px;
   margin-top: 8px;
-  font-size: 14px;
-  color: #2E7D32;
-  border: 1px solid #A5D6A7;
+  font-size: var(--ig-body-2-font-size);
+  color: var(--ig-success-500);
+  border: 1px solid var(--ig-success-200);
+
+  &__cost {
+    margin-left: 16px;
+  }
+}
+
+.order-delivery-date {
+  margin-top: 16px;
+}
+
+// ──────────────────────────────────────────────
+// Empty state
+// ──────────────────────────────────────────────
+.empty-state {
+  text-align: center;
+  padding: 24px;
+  color: var(--ig-gray-400);
+
+  &__icon {
+    font-size: 48px;
+    display: block;
+    margin: 0 auto 8px;
+  }
 }

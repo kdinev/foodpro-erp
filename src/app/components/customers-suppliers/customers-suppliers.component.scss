@@ -1,7 +1,71 @@
+// ──────────────────────────────────────────────
+// Page title
+// ──────────────────────────────────────────────
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__icon {
+    font-size: 28px;
+    color: var(--ig-primary-500);
+  }
+}
+
+// ──────────────────────────────────────────────
+// Grid toolbar
+// ──────────────────────────────────────────────
+.grid-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.toolbar-hint {
+  font-size: var(--ig-body-2-font-size);
+  color: var(--ig-gray-500);
+}
+
+.supplies-text {
+  font-size: var(--ig-caption-font-size);
+  color: var(--ig-gray-600);
+}
+
+// ──────────────────────────────────────────────
+// Icon helpers
+// ──────────────────────────────────────────────
+.icon-primary { color: var(--ig-primary-500); }
+.icon-danger  { color: var(--ig-error-500); }
+
+// ──────────────────────────────────────────────
+// Button helpers
+// ──────────────────────────────────────────────
+.btn-primary {
+  background: var(--ig-primary-500);
+  color: var(--ig-primary-500-contrast);
+}
+
+.btn-danger {
+  background: var(--ig-error-500);
+  color: var(--ig-error-500-contrast);
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+// ──────────────────────────────────────────────
+// Dialog
+// ──────────────────────────────────────────────
 .dialog-wrapper {
   padding: 24px;
   min-width: 580px;
   max-width: 680px;
+
+  &--narrow {
+    max-width: 400px;
+  }
 
   @media (max-width: 700px) {
     min-width: unset;
@@ -10,12 +74,21 @@
 }
 
 .dialog-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #212121;
+  font-size: var(--ig-h6-font-size);
+  font-weight: var(--ig-h6-font-weight);
+  color: var(--ig-gray-900);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+
+  &--danger {
+    color: var(--ig-error-500);
+  }
+
+  &__icon {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
 }
 
 .dialog-form {
@@ -40,7 +113,12 @@
   gap: 8px;
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--ig-gray-200);
+}
+
+.confirm-message {
+  margin-bottom: 24px;
+  color: var(--ig-gray-700);
 }
 
 igx-tabs {
