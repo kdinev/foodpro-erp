@@ -46,9 +46,9 @@
             </igx-column>
             <igx-column header="Ingredients" [sortable]="false" [filterable]="false" minWidth="260px">
               <ng-template igxCell let-cell="cell">
-                <div class="ing-chips">
+                <div>
                   @for (ing of cell.row.data.ingredients.slice(0, 4); track ing.ingredientId) {
-                    <span class="ing-chip">{{ ing.ingredientName }}</span>
+                    <span>{{ ing.ingredientName }}</span>
                   }
                   @if (cell.row.data.ingredients.length > 4) {
                     <span class="ing-chip ing-chip--more">+{{ cell.row.data.ingredients.length - 4 }}</span>

@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--ig-error-500);
+    color: var(--ig-error-500); // Rosé Pine Love
   }
 
   &__badge {
@@ -49,7 +49,7 @@
     padding: 20px 24px;
   }
 
-  &.warning igx-card-content .kpi-value { color: var(--ig-secondary-500); }
+  &.warning igx-card-content .kpi-value { color: var(--ig-warn-500); }
   &.error   igx-card-content .kpi-value { color: var(--ig-error-500); }
   &.success igx-card-content .kpi-value { color: var(--ig-success-500); }
 }
@@ -60,7 +60,7 @@
 .kpi-sub {
   &--danger  { color: var(--ig-error-500); }
   &--success { color: var(--ig-success-500); }
-  &--warning { color: var(--ig-secondary-500); }
+  &--warning { color: var(--ig-warn-500); }
 
   &__icon {
     font-size: var(--ig-body-2-font-size);
@@ -132,8 +132,8 @@
   }
 
   &--delayed {
-    border-left: 4px solid var(--ig-error-500) !important;
-    background: var(--ig-error-50) !important;
+    border-left: 4px solid var(--ig-error-500);
+    background: hsl(from var(--ig-error-500) h s l / 0.1);
   }
 
   &__number {
