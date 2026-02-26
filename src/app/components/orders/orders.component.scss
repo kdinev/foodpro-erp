@@ -1,3 +1,53 @@
+// ──────────────────────────────────────────────
+// Page title
+// ──────────────────────────────────────────────
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__icon {
+    font-size: 28px;
+    color: var(--ig-primary-500);
+  }
+}
+
+// ──────────────────────────────────────────────
+// Header pills
+// ──────────────────────────────────────────────
+.header-pills {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: var(--ig-caption-font-size);
+  font-weight: 600;
+
+  &--delayed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ig-error-50);
+    color: var(--ig-error-500);
+  }
+
+  &--active {
+    background: var(--ig-primary-50);
+    color: var(--ig-primary-800);
+  }
+
+  &__icon {
+    font-size: 18px;
+  }
+}
+
+// ──────────────────────────────────────────────
+// Filter bar
+// ──────────────────────────────────────────────
 .filter-bar {
   margin-bottom: 20px;
 
@@ -8,6 +58,83 @@
   }
 }
 
+.filter-chip {
+  cursor: pointer;
+
+  &__icon {
+    font-size: var(--ig-body-2-font-size);
+  }
+
+  igx-badge {
+    --ig-size: 1;
+  }
+}
+
+.section-card--no-padding {
+  padding: 0;
+}
+
+// ──────────────────────────────────────────────
+// Order number button
+// ──────────────────────────────────────────────
+.order-number-btn {
+  --ig-size: 1;
+
+  color: var(--ig-primary-500);
+  font-weight: 600;
+  padding: 0;
+  margin-inline: 12px;
+}
+
+// ──────────────────────────────────────────────
+// Item lines
+// ──────────────────────────────────────────────
+.item-line {
+  font-size: var(--ig-caption-font-size);
+  color: var(--ig-gray-700);
+
+  &--more {
+    font-size: var(--ig-overline-font-size);
+    color: var(--ig-gray-400);
+  }
+}
+
+.value-text {
+  font-weight: 600;
+}
+
+// ──────────────────────────────────────────────
+// Status cell
+// ──────────────────────────────────────────────
+.status-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+// ──────────────────────────────────────────────
+// Delayed chip
+// ──────────────────────────────────────────────
+.delayed-chip {
+  background: var(--ig-error-50);
+  color: var(--ig-error-500);
+  font-size: var(--ig-overline-font-size);
+
+  &__icon {
+    font-size: var(--ig-overline-font-size);
+    vertical-align: middle;
+  }
+
+  &__icon--sm {
+    font-size: var(--ig-caption-font-size);
+    vertical-align: middle;
+  }
+}
+
+// ──────────────────────────────────────────────
+// Progress cell
+// ──────────────────────────────────────────────
 .progress-cell {
   display: flex;
   align-items: center;
@@ -15,15 +142,53 @@
   width: 100%;
 }
 
+.text-muted {
+  color: var(--ig-gray-400);
+  font-size: var(--ig-caption-font-size);
+}
+
+.progress-bar--flex {
+  flex: 1;
+}
+
+.progress-bar--full {
+  width: 100%;
+}
+
+.progress-percent {
+  min-width: 36px;
+  font-size: var(--ig-caption-font-size);
+  font-weight: 600;
+  color: var(--ig-gray-700);
+}
+
+.due-date--delayed {
+  color: var(--ig-error-500);
+  font-weight: 700;
+}
+
+// ──────────────────────────────────────────────
+// Icon helpers
+// ──────────────────────────────────────────────
+.icon-primary { color: var(--ig-primary-500); }
+.icon-danger  { color: var(--ig-error-500); }
+.text-danger  { color: var(--ig-error-500); }
+
+// ──────────────────────────────────────────────
+// Conditional row highlights
+// ──────────────────────────────────────────────
 .delayed-order-row {
-  background-color: #FFEBEE !important;
+  background-color: var(--ig-error-50) !important;
 }
 
 .shipped-row {
-  background-color: #F1F8E9 !important;
-  color: #558B2F;
+  background-color: var(--ig-success-50) !important;
+  color: var(--ig-success-800);
 }
 
+// ──────────────────────────────────────────────
+// Dialog
+// ──────────────────────────────────────────────
 .dialog-wrapper {
   padding: 24px;
   min-width: 580px;
@@ -36,9 +201,9 @@
 }
 
 .dialog-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #212121;
+  font-size: var(--ig-h6-font-size);
+  font-weight: var(--ig-h6-font-weight);
+  color: var(--ig-gray-900);
   margin-bottom: 4px;
 }
 
@@ -47,18 +212,36 @@
   justify-content: flex-end;
   gap: 8px;
   padding-top: 16px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--ig-gray-200);
 }
 
+.detail-customer {
+  color: var(--ig-gray-500);
+  font-size: var(--ig-body-2-font-size);
+}
+
+.detail-status-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+// ──────────────────────────────────────────────
+// Order detail header
+// ──────────────────────────────────────────────
 .order-detail-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--ig-gray-200);
 }
 
+// ──────────────────────────────────────────────
+// Detail dates
+// ──────────────────────────────────────────────
 .detail-dates {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -70,46 +253,128 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #F8F9FA;
+  background: var(--ig-gray-50);
   border-radius: 8px;
   padding: 10px 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--ig-gray-200);
 
   igx-icon {
-    color: #616161;
+    color: var(--ig-gray-600);
     font-size: 20px;
   }
 }
 
+.detail-date-label {
+  font-size: var(--ig-overline-font-size);
+  color: var(--ig-gray-400);
+}
+
+.detail-date-value {
+  font-weight: 600;
+}
+
+// ──────────────────────────────────────────────
+// Detail progress
+// ──────────────────────────────────────────────
 .detail-progress {
-  background: #F8F9FA;
+  background: var(--ig-gray-50);
   border-radius: 8px;
   padding: 14px 16px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--ig-gray-200);
   margin-bottom: 16px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  &__label {
+    font-size: var(--ig-body-2-font-size);
+    font-weight: 500;
+  }
+
+  &__value {
+    font-size: var(--ig-body-2-font-size);
+    font-weight: 700;
+    color: var(--ig-primary-500);
+  }
+}
+
+// ──────────────────────────────────────────────
+// Detail items
+// ──────────────────────────────────────────────
+.detail-items-section {
+  margin: 16px 0;
+}
+
+.detail-items-heading {
+  font-size: var(--ig-body-2-font-size);
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ig-gray-700);
 }
 
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: var(--ig-caption-font-size);
 
   th {
-    background: #F5F5F5;
+    background: var(--ig-gray-100);
     padding: 8px 12px;
     text-align: left;
     font-weight: 600;
-    color: #424242;
-    border-bottom: 2px solid #e0e0e0;
+    color: var(--ig-gray-700);
+    border-bottom: 2px solid var(--ig-gray-200);
   }
 
   td {
     padding: 8px 12px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #424242;
+    border-bottom: 1px solid var(--ig-gray-100);
+    color: var(--ig-gray-700);
   }
 
   tfoot td {
     border-bottom: none;
   }
+
+  &__total-label {
+    text-align: right;
+    font-weight: 600;
+    padding-top: 8px;
+  }
+
+  &__total-value {
+    font-weight: 700;
+    font-size: var(--ig-subtitle-1-font-size);
+    color: var(--ig-primary-500);
+    padding-top: 8px;
+  }
+}
+
+// ──────────────────────────────────────────────
+// Detail notes
+// ──────────────────────────────────────────────
+.detail-notes {
+  background: var(--ig-gray-50);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: var(--ig-caption-font-size);
+  color: var(--ig-gray-600);
+  margin-bottom: 16px;
+
+  &__icon {
+    font-size: var(--ig-body-2-font-size);
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+}
+
+// ──────────────────────────────────────────────
+// Button helpers
+// ──────────────────────────────────────────────
+.btn-primary {
+  background: var(--ig-primary-500);
+  color: var(--ig-primary-500-contrast);
 }
