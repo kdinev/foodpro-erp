@@ -1,17 +1,17 @@
 <div class="erp-page">
   <div class="erp-page__header">
-    <h1 style="display:flex;align-items:center;gap:10px">
-      <igx-icon style="font-size:28px;color:#1565C0">receipt_long</igx-icon>
+    <h1 class="page-title">
+      <igx-icon class="page-title__icon">receipt_long</igx-icon>
       Orders Tracking
     </h1>
-    <div style="display:flex;align-items:center;gap:12px">
+    <div class="header-pills">
       @if (delayedCount() > 0) {
-        <div style="display:flex;align-items:center;gap:6px;background:#FFEBEE;padding:6px 14px;border-radius:20px;color:#D32F2F;font-size:13px;font-weight:600">
-          <igx-icon style="font-size:18px">schedule</igx-icon>
+        <div class="header-pill header-pill--delayed">
+          <igx-icon class="header-pill__icon">schedule</igx-icon>
           {{ delayedCount() }} delayed order{{ delayedCount() > 1 ? 's' : '' }}
         </div>
       }
-      <div style="background:#E3F2FD;padding:6px 14px;border-radius:20px;color:#1565C0;font-size:13px;font-weight:600">
+      <div class="header-pill header-pill--active">
         {{ activeCount() }} active orders
       </div>
     </div>
@@ -25,8 +25,8 @@
           [selectable]="true"
           [selected]="statusFilter() === f.value"
           (selectedChanged)="statusFilter.set(f.value)"
-          [style.cursor]="'pointer'">
-          <igx-icon igxPrefix style="font-size:14px">{{ f.icon }}</igx-icon>
+          class="filter-chip">
+          <igx-icon igxPrefix class="filter-chip__icon">{{ f.icon }}</igx-icon>
           {{ f.label }}
           @if (f.value === 'delayed' && delayedCount() > 0) {
             <igx-badge [value]="delayedCount()" type="error" igxSuffix></igx-badge>
@@ -37,7 +37,7 @@
   </div>
 
   <!-- Orders Grid -->
-  <div class="section-card" style="padding:0">
+  <div class="section-card section-card--no-padding">
     <igx-grid
       [data]="filteredOrders()"
       [autoGenerate]="false"
@@ -48,7 +48,7 @@
 
       <igx-column field="orderNumber" header="Order #" [sortable]="true" [filterable]="true" dataType="string" width="150px" [pinned]="true">
         <ng-template igxCell let-val let-cell="cell">
-          <button igxButton="flat" (click)="openDetail(cell.row.data)" style="color:#1565C0;font-weight:600;padding:0">
+          <button igxButton="flat" (click)="openDetail(cell.row.data)" class="order-number-btn">
             {{ val }}
           </button>
         </ng-template>
@@ -60,12 +60,12 @@
         <ng-template igxCell let-cell="cell">
           <div>
             @for (item of cell.row.data.items.slice(0, 2); track item.productId) {
-              <div style="font-size:12px;color:#424242">
+              <div class="item-line">
                 {{ item.quantity }} × {{ item.productName }}
               </div>
             }
             @if (cell.row.data.items.length > 2) {
-              <div style="font-size:11px;color:#9e9e9e">+{{ cell.row.data.items.length - 2 }} more...</div>
+              <div class="item-line item-line--more">+{{ cell.row.data.items.length - 2 }} more...</div>
             }
           </div>
         </ng-template>
@@ -73,17 +73,17 @@
 
       <igx-column field="totalValue" header="Value" [sortable]="true" dataType="number" width="110px">
         <ng-template igxCell let-val>
-          <span style="font-weight:600">${{ val | number:'1.0-0' }}</span>
+          <span class="value-text">${{ val | number:'1.0-0' }}</span>
         </ng-template>
       </igx-column>
 
       <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" dataType="string" width="150px">
         <ng-template igxCell let-val let-cell="cell">
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <div class="status-cell">
             <span class="status-chip" [ngClass]="val">{{ val | titlecase }}</span>
             @if (cell.row.data.isDelayed) {
-              <span class="status-chip error" style="background:#FFEBEE;color:#D32F2F;font-size:10px">
-                <igx-icon style="font-size:11px;vertical-align:middle">schedule</igx-icon> DELAYED
+              <span class="status-chip error delayed-chip">
+                <igx-icon class="delayed-chip__icon">schedule</igx-icon> DELAYED
               </span>
             }
           </div>
@@ -94,16 +94,16 @@
         <ng-template igxCell let-val let-cell="cell">
           <div class="progress-cell">
             @if (cell.row.data.status === 'pending') {
-              <span style="color:#9e9e9e;font-size:12px">Not started</span>
+              <span class="text-muted">Not started</span>
             } @else {
               <igx-linear-bar
                 [value]="val"
                 [max]="100"
                 [type]="getProgressType(val, cell.row.data.isDelayed)"
                 [animate]="true"
-                style="flex:1">
+                class="progress-bar--flex">
               </igx-linear-bar>
-              <span style="min-width:36px;font-size:12px;font-weight:600;color:#424242">{{ val }}%</span>
+              <span class="progress-percent">{{ val }}%</span>
             }
           </div>
         </ng-template>
@@ -115,8 +115,7 @@
 
       <igx-column field="dueDate" header="Due Date" [sortable]="true" dataType="date" width="130px">
         <ng-template igxCell let-val let-cell="cell">
-          <span [style.color]="cell.row.data.isDelayed ? '#D32F2F' : 'inherit'"
-            [style.fontWeight]="cell.row.data.isDelayed ? '700' : 'normal'">
+          <span [class.due-date--delayed]="cell.row.data.isDelayed">
             {{ val | date:'mediumDate' }}
           </span>
         </ng-template>
@@ -127,7 +126,7 @@
           @if (val) {
             {{ val | date:'mediumDate' }}
           } @else {
-            <span style="color:#9e9e9e;font-size:12px">—</span>
+            <span class="text-muted">—</span>
           }
         </ng-template>
       </igx-column>
@@ -135,7 +134,7 @@
       <igx-column header="Action" [sortable]="false" [filterable]="false" width="56px">
         <ng-template igxCell let-cell="cell">
           <button igxIconButton="flat" igxRipple (click)="openDetail(cell.row.data)" title="View Details">
-            <igx-icon style="color:#1565C0">visibility</igx-icon>
+            <igx-icon class="icon-primary">visibility</igx-icon>
           </button>
         </ng-template>
       </igx-column>
@@ -143,20 +142,20 @@
   </div>
 </div>
 
-<!-- ═══════════ Order Detail / Update Dialog ═══════════ -->
+<!-- Order Detail / Update Dialog -->
 <igx-dialog #detailDialog [isModal]="true" [closeOnEscape]="true">
   @if (selectedOrder(); as order) {
     <div class="dialog-wrapper">
       <div class="order-detail-header">
         <div>
           <h2 class="dialog-title">{{ order.orderNumber }}</h2>
-          <span style="color:#757575;font-size:14px">Customer: <strong>{{ order.customerName }}</strong></span>
+          <span class="detail-customer">Customer: <strong>{{ order.customerName }}</strong></span>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="detail-status-group">
           <span class="status-chip" [ngClass]="order.status">{{ order.status | titlecase }}</span>
           @if (order.isDelayed) {
-            <span class="status-chip error" style="background:#FFEBEE;color:#D32F2F">
-              <igx-icon style="font-size:12px;vertical-align:middle">schedule</igx-icon> DELAYED
+            <span class="status-chip error delayed-chip">
+              <igx-icon class="delayed-chip__icon--sm">schedule</igx-icon> DELAYED
             </span>
           }
         </div>
@@ -167,15 +166,15 @@
         <div class="detail-date-item">
           <igx-icon>calendar_today</igx-icon>
           <div>
-            <div style="font-size:11px;color:#9e9e9e">Order Date</div>
-            <div style="font-weight:600">{{ order.orderDate | date:'mediumDate' }}</div>
+            <div class="detail-date-label">Order Date</div>
+            <div class="detail-date-value">{{ order.orderDate | date:'mediumDate' }}</div>
           </div>
         </div>
         <div class="detail-date-item" [class.overdue]="order.isDelayed">
-          <igx-icon [style.color]="order.isDelayed ? '#D32F2F' : 'inherit'">event</igx-icon>
+          <igx-icon [class.icon-danger]="order.isDelayed">event</igx-icon>
           <div>
-            <div style="font-size:11px;color:#9e9e9e">Due Date</div>
-            <div style="font-weight:600" [style.color]="order.isDelayed ? '#D32F2F' : 'inherit'">
+            <div class="detail-date-label">Due Date</div>
+            <div class="detail-date-value" [class.text-danger]="order.isDelayed">
               {{ order.dueDate | date:'mediumDate' }}
             </div>
           </div>
@@ -183,8 +182,8 @@
         <div class="detail-date-item">
           <igx-icon>local_shipping</igx-icon>
           <div>
-            <div style="font-size:11px;color:#9e9e9e">Ship Date</div>
-            <div style="font-weight:600">{{ order.shipmentDate ? (order.shipmentDate | date:'mediumDate') : 'Not shipped' }}</div>
+            <div class="detail-date-label">Ship Date</div>
+            <div class="detail-date-value">{{ order.shipmentDate ? (order.shipmentDate | date:'mediumDate') : 'Not shipped' }}</div>
           </div>
         </div>
       </div>
@@ -192,16 +191,16 @@
       <!-- Production Progress -->
       @if (!['pending'].includes(order.status)) {
         <div class="detail-progress">
-          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-            <span style="font-size:14px;font-weight:500">Production Progress</span>
-            <span style="font-size:14px;font-weight:700;color:#1565C0">{{ order.productionProgress }}%</span>
+          <div class="detail-progress__header">
+            <span class="detail-progress__label">Production Progress</span>
+            <span class="detail-progress__value">{{ order.productionProgress }}%</span>
           </div>
           <igx-linear-bar
             [value]="order.productionProgress"
             [max]="100"
             [type]="getProgressType(order.productionProgress, order.isDelayed)"
             [animate]="true"
-            style="width:100%">
+            class="progress-bar--full">
           </igx-linear-bar>
         </div>
       }
@@ -245,8 +244,8 @@
       </div>
 
       @if (order.notes) {
-        <div style="background:#F8F9FA;border-radius:6px;padding:10px 12px;font-size:13px;color:#616161;margin-bottom:16px">
-          <igx-icon style="font-size:14px;vertical-align:middle;margin-right:4px">notes</igx-icon>
+        <div class="detail-notes">
+          <igx-icon class="detail-notes__icon">notes</igx-icon>
           {{ order.notes }}
         </div>
       }
@@ -256,7 +255,7 @@
         <button igxButton="flat" igxRipple (click)="detailDialog.close()">Close</button>
         @if (getNextStatus(order.status); as next) {
           <button igxButton="raised" igxRipple (click)="updateStatus(order, next)"
-            style="background:#1565C0;color:white">
+            class="btn-primary">
             <igx-icon>arrow_forward</igx-icon>
             Move to {{ next | titlecase }}
           </button>

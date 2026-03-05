@@ -9,14 +9,14 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass, TitleCasePipe, DatePipe } from '@angular/common';
-import { IGX_GRID_DIRECTIVES } from 'igniteui-angular/grids/grid';
-import { IGX_TABS_DIRECTIVES } from 'igniteui-angular/tabs';
-import { IgxDialogComponent } from 'igniteui-angular/dialog';
-import { IGX_INPUT_GROUP_DIRECTIVES } from 'igniteui-angular/input-group';
-import { IgxSelectComponent, IgxSelectItemComponent } from 'igniteui-angular/select';
-import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
-import { IgxIconComponent } from 'igniteui-angular/icon';
-import { IgxDatePickerComponent } from 'igniteui-angular/date-picker';
+import { IGX_GRID_DIRECTIVES } from '@infragistics/igniteui-angular/grids/grid';
+import { IGX_TABS_DIRECTIVES } from '@infragistics/igniteui-angular/tabs';
+import { IgxDialogComponent } from '@infragistics/igniteui-angular/dialog';
+import { IGX_INPUT_GROUP_DIRECTIVES } from '@infragistics/igniteui-angular/input-group';
+import { IgxSelectComponent, IgxSelectItemComponent } from '@infragistics/igniteui-angular/select';
+import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from '@infragistics/igniteui-angular/directives';
+import { IgxIconComponent } from '@infragistics/igniteui-angular/icon';
+import { IgxDatePickerComponent } from '@infragistics/igniteui-angular/date-picker';
 import { ErpDataService } from '../../services/erp-data.service';
 import { Customer, Supplier } from '../../models/erp.models';
 

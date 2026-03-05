@@ -1,21 +1,21 @@
 <div class="erp-page">
   <div class="erp-page__header">
-    <h1 style="display:flex;align-items:center;gap:10px">
-      <igx-icon style="font-size:28px;color:#1565C0">inventory_2</igx-icon>
+    <h1 class="page-title">
+      <igx-icon class="page-title__icon">inventory_2</igx-icon>
       Products &amp; Inventory
     </h1>
   </div>
 
   <igx-tabs>
 
-    <!-- ═══════════ PRODUCTS TAB ═══════════ -->
+    <!-- PRODUCTS TAB -->
     <igx-tab-item>
       <igx-tab-header>
         <igx-icon igxTabHeaderIcon>kitchen</igx-icon>
         <span igxTabHeaderLabel>Products ({{ products().length }})</span>
       </igx-tab-header>
       <igx-tab-content>
-        <div style="padding-top:16px">
+        <div class="tab-content-padded">
           <igx-grid [data]="products()" [autoGenerate]="false" [allowFiltering]="true"
             [rowClasses]="productRowClasses" height="520px" width="100%">
             <igx-column field="name" header="Product Name" [sortable]="true" [filterable]="true" dataType="string" minWidth="200px"></igx-column>
@@ -23,32 +23,32 @@
             <igx-column field="category" header="Category" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
             <igx-column field="totalStock" header="Total Stock" [sortable]="true" dataType="number" width="130px">
               <ng-template igxCell let-val let-cell="cell">
-                <span style="font-weight:600">{{ val | number }}</span>
-                <span style="color:#9e9e9e;margin-left:4px;font-size:12px">{{ cell.row.data.unit }}</span>
+                <span class="stock-value">{{ val | number }}</span>
+                <span class="stock-unit">{{ cell.row.data.unit }}</span>
               </ng-template>
             </igx-column>
             <igx-column field="pendingOrderQty" header="Reserved (Orders)" [sortable]="true" dataType="number" width="160px">
               <ng-template igxCell let-val let-cell="cell">
-                <span style="color:#E65100;font-weight:500">{{ val | number }}</span>
-                <span style="color:#9e9e9e;margin-left:4px;font-size:12px">{{ cell.row.data.unit }}</span>
+                <span class="reserved-value">{{ val | number }}</span>
+                <span class="stock-unit">{{ cell.row.data.unit }}</span>
               </ng-template>
             </igx-column>
             <igx-column field="freeStock" header="Free to Ship" [sortable]="true" dataType="number" width="140px">
               <ng-template igxCell let-val let-cell="cell">
-                <span [style.color]="val === 0 ? '#D32F2F' : '#2E7D32'" style="font-weight:700">
+                <span class="free-stock-value" [class.free-stock-value--zero]="val === 0" [class.free-stock-value--ok]="val !== 0">
                   {{ val | number }}
                 </span>
-                <span style="color:#9e9e9e;margin-left:4px;font-size:12px">{{ cell.row.data.unit }}</span>
+                <span class="stock-unit">{{ cell.row.data.unit }}</span>
                 @if (val === 0) {
-                  <igx-badge type="error" value="0 Free" style="margin-left:6px;font-size:10px"></igx-badge>
+                  <igx-badge type="error" value="0 Free" class="zero-free-badge"></igx-badge>
                 }
               </ng-template>
             </igx-column>
             <igx-column header="Ingredients" [sortable]="false" [filterable]="false" minWidth="260px">
               <ng-template igxCell let-cell="cell">
-                <div class="ing-chips">
+                <div>
                   @for (ing of cell.row.data.ingredients.slice(0, 4); track ing.ingredientId) {
-                    <span class="ing-chip">{{ ing.ingredientName }}</span>
+                    <span>{{ ing.ingredientName }}</span>
                   }
                   @if (cell.row.data.ingredients.length > 4) {
                     <span class="ing-chip ing-chip--more">+{{ cell.row.data.ingredients.length - 4 }}</span>
@@ -61,20 +61,20 @@
       </igx-tab-content>
     </igx-tab-item>
 
-    <!-- ═══════════ INGREDIENTS TAB ═══════════ -->
+    <!-- INGREDIENTS TAB -->
     <igx-tab-item>
       <igx-tab-header>
         <igx-icon igxTabHeaderIcon>eco</igx-icon>
         <span igxTabHeaderLabel>Ingredients ({{ ingredients().length }})</span>
       </igx-tab-header>
       <igx-tab-content>
-        <div class="grid-toolbar" style="padding-top:16px">
-          <span style="font-size:14px;color:#757575">Track ingredients and their suppliers</span>
-          <div style="display:flex;gap:8px">
+        <div class="grid-toolbar grid-toolbar--padded">
+          <span class="toolbar-hint">Track ingredients and their suppliers</span>
+          <div class="toolbar-actions">
             <button igxButton="outlined" igxRipple (click)="openOrderDialog()">
               <igx-icon>add_shopping_cart</igx-icon> New Purchase Order
             </button>
-            <button igxButton="raised" igxRipple (click)="openAddIngredient()" style="color:white;background:#1565C0">
+            <button igxButton="raised" igxRipple (click)="openAddIngredient()" class="btn-primary">
               <igx-icon>add</igx-icon> Add Ingredient
             </button>
           </div>
@@ -88,7 +88,7 @@
           <igx-column field="currentStock" header="In Stock" [sortable]="true" dataType="number" width="180px">
             <ng-template igxCell let-val let-cell="cell">
               <div class="stock-cell">
-                <span [style.color]="cell.row.data.isLow ? '#D32F2F' : '#2E7D32'" style="font-weight:600;min-width:60px">
+                <span class="stock-cell__value" [class.stock-cell__value--low]="cell.row.data.isLow" [class.stock-cell__value--ok]="!cell.row.data.isLow">
                   {{ val | number }} {{ cell.row.data.unit }}
                 </span>
                 <igx-linear-bar
@@ -96,7 +96,7 @@
                   [max]="100"
                   [type]="cell.row.data.isLow ? 'danger' : 'default'"
                   [animate]="true"
-                  style="flex:1;min-width:80px">
+                  class="stock-cell__bar">
                 </igx-linear-bar>
               </div>
             </ng-template>
@@ -110,7 +110,7 @@
             <ng-template igxCell let-val>
               @if (val) {
                 <span class="status-chip warning">
-                  <igx-icon style="font-size:12px;vertical-align:middle">warning</igx-icon> Low Stock
+                  <igx-icon class="status-icon--sm">warning</igx-icon> Low Stock
                 </span>
               } @else {
                 <span class="status-chip active">OK</span>
@@ -121,7 +121,7 @@
             <ng-template igxCell let-cell="cell">
               <igx-chips-area>
                 @for (s of cell.row.data.suppliers; track s.supplierId) {
-                  <igx-chip [selectable]="false" [removable]="false" style="font-size:11px">
+                  <igx-chip [selectable]="false" [removable]="false" class="supplier-chip">
                     {{ s.supplierName }}
                   </igx-chip>
                 }
@@ -131,7 +131,7 @@
           <igx-column header="Order" [sortable]="false" [filterable]="false" width="56px">
             <ng-template igxCell let-cell="cell">
               <button igxIconButton="flat" igxRipple (click)="openOrderDialog(cell.row.data)" title="Place Order"
-                [style.color]="cell.row.data.isLow ? '#D32F2F' : '#1565C0'">
+                [class.icon-danger]="cell.row.data.isLow" [class.icon-primary]="!cell.row.data.isLow">
                 <igx-icon>add_shopping_cart</igx-icon>
               </button>
             </ng-template>
@@ -140,16 +140,16 @@
       </igx-tab-content>
     </igx-tab-item>
 
-    <!-- ═══════════ PURCHASE ORDERS TAB ═══════════ -->
+    <!-- PURCHASE ORDERS TAB -->
     <igx-tab-item>
       <igx-tab-header>
         <igx-icon igxTabHeaderIcon>local_shipping</igx-icon>
         <span igxTabHeaderLabel>Purchase Orders ({{ activePoOrders().length }} active)</span>
       </igx-tab-header>
       <igx-tab-content>
-        <div class="grid-toolbar" style="padding-top:16px">
-          <span style="font-size:14px;color:#757575">Track ingredient purchase orders</span>
-          <button igxButton="raised" igxRipple (click)="openOrderDialog()" style="color:white;background:#1565C0">
+        <div class="grid-toolbar grid-toolbar--padded">
+          <span class="toolbar-hint">Track ingredient purchase orders</span>
+          <button igxButton="raised" igxRipple (click)="openOrderDialog()" class="btn-primary">
             <igx-icon>add_shopping_cart</igx-icon> New Purchase Order
           </button>
         </div>
@@ -165,7 +165,7 @@
             </ng-template>
           </igx-column>
           <igx-column field="totalValue" header="Value" [sortable]="true" dataType="number" width="110px">
-            <ng-template igxCell let-val>$\{{ val | number:'1.2-2' }}</ng-template>
+            <ng-template igxCell let-val>${{ val | number:'1.2-2' }}</ng-template>
           </igx-column>
           <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" dataType="string" width="130px">
             <ng-template igxCell let-val>
@@ -177,7 +177,7 @@
           </igx-column>
           <igx-column field="expectedDelivery" header="Expected" [sortable]="true" dataType="date" width="130px">
             <ng-template igxCell let-val let-cell="cell">
-              <span [style.color]="cell.row.data.isDelayed ? '#D32F2F' : 'inherit'" [style.fontWeight]="cell.row.data.isDelayed ? '700' : 'normal'">
+              <span [class.due-date--delayed]="cell.row.data.isDelayed">
                 {{ val | date:'mediumDate' }}
               </span>
             </ng-template>
@@ -196,11 +196,11 @@
   </igx-tabs>
 </div>
 
-<!-- ═══════════ Add Ingredient Dialog ═══════════ -->
+<!-- Add Ingredient Dialog -->
 <igx-dialog #addIngDialog [isModal]="true" [closeOnEscape]="true">
-  <div class="dialog-wrapper" style="min-width:440px">
+  <div class="dialog-wrapper dialog-wrapper--add-ing">
     <h2 class="dialog-title">
-      <igx-icon style="color:#1565C0;margin-right:8px">eco</igx-icon> Add New Ingredient
+      <igx-icon class="dialog-title__icon icon-primary">eco</igx-icon> Add New Ingredient
     </h2>
     <form [formGroup]="addIngForm" class="dialog-form">
       <div class="form-row">
@@ -223,7 +223,7 @@
           <input igxInput formControlName="currentStock" type="number" min="0" />
         </igx-input-group>
       </div>
-      <igx-input-group type="border" style="width:50%">
+      <igx-input-group type="border" class="input-half-width">
         <label igxLabel>Reorder Threshold *</label>
         <input igxInput formControlName="reorderThreshold" type="number" min="1" />
       </igx-input-group>
@@ -232,23 +232,23 @@
       <button igxButton="flat" igxRipple (click)="addIngDialog.close()">Cancel</button>
       <button igxButton="raised" igxRipple (click)="saveIngredient()"
         [disabled]="addIngForm.invalid"
-        style="background:#1565C0;color:white">
+        class="btn-primary">
         Add Ingredient
       </button>
     </div>
   </div>
 </igx-dialog>
 
-<!-- ═══════════ Ingredient Order Dialog ═══════════ -->
+<!-- Ingredient Order Dialog -->
 <igx-dialog #orderDialog [isModal]="true" [closeOnEscape]="true">
   <div class="dialog-wrapper order-dialog">
     <h2 class="dialog-title">
-      <igx-icon style="color:#E65100;margin-right:8px">add_shopping_cart</igx-icon>
+      <igx-icon class="dialog-title__icon icon-secondary">add_shopping_cart</igx-icon>
       New Purchase Order
     </h2>
 
     <!-- Ingredient selector -->
-    <div style="margin-bottom:20px">
+    <div class="order-ingredient-select">
       <igx-select [ngModel]="selectedIngredientId()"
         (ngModelChange)="onIngredientSelect($event)"
         placeholder="Select an ingredient to order">
@@ -257,7 +257,7 @@
           <igx-select-item [value]="ing.id">
             {{ ing.name }}
             @if (ing.isLow) {
-              <span style="color:#D32F2F;font-size:11px"> — LOW STOCK</span>
+              <span class="low-stock-label"> — LOW STOCK</span>
             }
           </igx-select-item>
         }
@@ -269,7 +269,7 @@
       <div class="split-section">
         <div class="split-header">
           <span>Distribute order across suppliers for <strong>{{ ing.name }}</strong></span>
-          <span style="font-size:12px;color:#757575">Unit: {{ ing.unit }}</span>
+          <span class="split-header__unit">Unit: {{ ing.unit }}</span>
         </div>
 
         @for (entry of splitEntries(); track entry.supplierId; let i = $index) {
@@ -279,7 +279,7 @@
               <span class="split-supplier">{{ entry.supplierName }}</span>
             </label>
             <div class="split-details">
-              <igx-input-group type="border" style="width:140px">
+              <igx-input-group type="border" class="split-qty-input">
                 <label igxLabel>Quantity ({{ ing.unit }})</label>
                 <input igxInput type="number" min="1" [disabled]="!entry.selected"
                   [value]="entry.quantity"
@@ -296,14 +296,14 @@
         <!-- Summary -->
         @if (totalOrderQty() > 0) {
           <div class="order-summary">
-            <igx-icon style="color:#1565C0">summarize</igx-icon>
+            <igx-icon class="icon-primary">summarize</igx-icon>
             <span>Total: <strong>{{ totalOrderQty() }} {{ ing.unit }}</strong></span>
-            <span style="margin-left:16px">Est. Cost: <strong>${{ totalOrderValue() | number:'1.2-2' }}</strong></span>
+            <span class="order-summary__cost">Est. Cost: <strong>${{ totalOrderValue() | number:'1.2-2' }}</strong></span>
           </div>
         }
 
         <!-- Default expected delivery -->
-        <div style="margin-top:16px">
+        <div class="order-delivery-date">
           <igx-date-picker
             [ngModel]="orderDeliveryDate()"
             (ngModelChange)="orderDeliveryDate.set($event)"
@@ -314,8 +314,8 @@
         </div>
       </div>
     } @else {
-      <div style="text-align:center;padding:24px;color:#9e9e9e">
-        <igx-icon style="font-size:48px;display:block;margin:0 auto 8px">shopping_cart</igx-icon>
+      <div class="empty-state">
+        <igx-icon class="empty-state__icon">shopping_cart</igx-icon>
         Select an ingredient above to configure the order.
       </div>
     }
@@ -324,7 +324,7 @@
       <button igxButton="flat" igxRipple (click)="orderDialog.close()">Cancel</button>
       <button igxButton="raised" igxRipple (click)="submitOrder()"
         [disabled]="!isOrderValid()"
-        style="background:#E65100;color:white">
+        class="btn-secondary">
         <igx-icon>send</igx-icon> Submit Order
       </button>
     </div>

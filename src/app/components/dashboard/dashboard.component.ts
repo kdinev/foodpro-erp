@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { NgClass, TitleCasePipe, DatePipe, DecimalPipe } from '@angular/common';
-import { IgxIconComponent } from 'igniteui-angular/icon';
-import { IgxLinearProgressBarComponent } from 'igniteui-angular/progressbar';
-import { IgxBadgeComponent } from 'igniteui-angular/badge';
-import { IGX_CARD_DIRECTIVES } from 'igniteui-angular/card';
+import { IgxIconComponent } from '@infragistics/igniteui-angular/icon';
+import { IgxLinearProgressBarComponent } from '@infragistics/igniteui-angular/progressbar';
+import { IgxBadgeComponent } from '@infragistics/igniteui-angular/badge';
+import { IGX_CARD_DIRECTIVES } from '@infragistics/igniteui-angular/card';
 import { ErpDataService } from '../../services/erp-data.service';
 
 @Component({

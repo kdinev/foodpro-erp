@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgClass, TitleCasePipe, DatePipe, DecimalPipe } from '@angular/common';
-import { IGX_GRID_DIRECTIVES } from 'igniteui-angular/grids/grid';
-import { IgxDialogComponent } from 'igniteui-angular/dialog';
-import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
-import { IgxIconComponent } from 'igniteui-angular/icon';
-import { IgxLinearProgressBarComponent } from 'igniteui-angular/progressbar';
-import { IgxBadgeComponent } from 'igniteui-angular/badge';
-import { IgxChipComponent, IgxChipsAreaComponent } from 'igniteui-angular/chips';
+import { IGX_GRID_DIRECTIVES } from '@infragistics/igniteui-angular/grids/grid';
+import { IgxDialogComponent } from '@infragistics/igniteui-angular/dialog';
+import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from '@infragistics/igniteui-angular/directives';
+import { IgxIconComponent } from '@infragistics/igniteui-angular/icon';
+import { IgxLinearProgressBarComponent } from '@infragistics/igniteui-angular/progressbar';
+import { IgxBadgeComponent } from '@infragistics/igniteui-angular/badge';
+import { IgxChipComponent, IgxChipsAreaComponent } from '@infragistics/igniteui-angular/chips';
 import { ErpDataService } from '../../services/erp-data.service';
 import { CustomerOrder, OrderItem, OrderStatus } from '../../models/erp.models';
 

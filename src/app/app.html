@@ -1,17 +1,21 @@
 <div class="erp-app-container ig-typography">
   <!-- Top Navbar -->
-  <igx-navbar [isActionButtonVisible]="false" class="app-navbar">
+  <igx-navbar [isActionButtonVisible]="false">
     <div igxNavbarAction>
-      <igx-icon igxRipple (click)="toggleDrawer()" style="cursor:pointer">menu</igx-icon>
+      <button igxIconButton="flat" (click)="toggleDrawer()">
+        <igx-icon>menu</igx-icon>
+      </button>
     </div>
-    <span igxNavbarTitle style="font-size:20px;font-weight:500;letter-spacing:0.5px;flex:1">FoodPro ERP</span>
+
+    <span igxNavbarTitle>FoodPro ERP</span>
+
     @if ((dataService.alerts$ | async)?.length) {
-      <span style="position:relative;display:inline-flex;align-items:center;margin-right:8px">
+      <span class="notification-wrapper">
         <igx-icon>notifications</igx-icon>
         <igx-badge
           [value]="((dataService.alerts$ | async)?.length ?? 0)"
           type="error"
-          style="position:absolute;top:-6px;right:-6px">
+          class="notification-badge">
         </igx-badge>
       </span>
     }
@@ -22,7 +26,8 @@
     <igx-nav-drawer #drawer [isOpen]="true" [pinThreshold]="0" [pin]="true">
       <ng-template igxDrawer>
         <nav>
-          <span igxDrawerItem [isHeader]="true" class="erp-nav-header">Main Menu</span>
+          <span igxDrawerItem [isHeader]="true">Main Menu</span>
+
           @for (item of navItems; track item.path) {
             <span igxDrawerItem igxRipple
               [routerLink]="item.path"

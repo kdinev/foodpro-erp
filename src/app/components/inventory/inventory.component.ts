@@ -9,17 +9,17 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { NgClass, TitleCasePipe, DatePipe, DecimalPipe } from '@angular/common';
-import { IGX_GRID_DIRECTIVES } from 'igniteui-angular/grids/grid';
-import { IGX_TABS_DIRECTIVES } from 'igniteui-angular/tabs';
-import { IgxDialogComponent } from 'igniteui-angular/dialog';
-import { IGX_INPUT_GROUP_DIRECTIVES } from 'igniteui-angular/input-group';
-import { IgxSelectComponent, IgxSelectItemComponent } from 'igniteui-angular/select';
-import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from 'igniteui-angular/directives';
-import { IgxIconComponent } from 'igniteui-angular/icon';
-import { IgxChipComponent, IgxChipsAreaComponent } from 'igniteui-angular/chips';
-import { IgxLinearProgressBarComponent } from 'igniteui-angular/progressbar';
-import { IgxBadgeComponent } from 'igniteui-angular/badge';
-import { IgxDatePickerComponent } from 'igniteui-angular/date-picker';
+import { IGX_GRID_DIRECTIVES } from '@infragistics/igniteui-angular/grids/grid';
+import { IGX_TABS_DIRECTIVES } from '@infragistics/igniteui-angular/tabs';
+import { IgxDialogComponent } from '@infragistics/igniteui-angular/dialog';
+import { IGX_INPUT_GROUP_DIRECTIVES } from '@infragistics/igniteui-angular/input-group';
+import { IgxSelectComponent, IgxSelectItemComponent } from '@infragistics/igniteui-angular/select';
+import { IgxButtonDirective, IgxIconButtonDirective, IgxRippleDirective } from '@infragistics/igniteui-angular/directives';
+import { IgxIconComponent } from '@infragistics/igniteui-angular/icon';
+import { IgxChipComponent, IgxChipsAreaComponent } from '@infragistics/igniteui-angular/chips';
+import { IgxLinearProgressBarComponent } from '@infragistics/igniteui-angular/progressbar';
+import { IgxBadgeComponent } from '@infragistics/igniteui-angular/badge';
+import { IgxDatePickerComponent } from '@infragistics/igniteui-angular/date-picker';
 import { ErpDataService } from '../../services/erp-data.service';
 import { Ingredient, SplitOrderEntry } from '../../models/erp.models';
 
