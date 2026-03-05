@@ -54,9 +54,9 @@
         </ng-template>
       </igx-column>
 
-      <igx-column field="customerName" header="Customer" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+      <igx-column field="customerName" header="Customer" [sortable]="true" [filterable]="true" dataType="string" minWidth="160px"></igx-column>
 
-      <igx-column header="Items" [sortable]="false" [filterable]="false" width="220px">
+      <igx-column header="Items" [sortable]="false" [filterable]="false" minWidth="200px">
         <ng-template igxCell let-cell="cell">
           <div>
             @for (item of cell.row.data.items.slice(0, 2); track item.productId) {
@@ -207,34 +207,41 @@
       }
 
       <!-- Line Items -->
-      <div style="margin:16px 0">
-        <div style="font-size:14px;font-weight:600;margin-bottom:8px;color:#424242">Order Items</div>
-        <table class="items-table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Qty</th>
-              <th>Unit Price</th>
-              <th>Line Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (item of order.items; track item.productId) {
-              <tr>
-                <td>{{ item.productName }}</td>
-                <td>{{ item.quantity | number }} {{ item.unit }}</td>
-                <td>${{ item.pricePerUnit | number:'1.2-2' }}</td>
-                <td><strong>${{ (item.quantity * item.pricePerUnit) | number:'1.2-2' }}</strong></td>
-              </tr>
-            }
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" style="text-align:right;font-weight:600;padding-top:8px">Total:</td>
-              <td style="font-weight:700;font-size:16px;color:#1565C0;padding-top:8px">${{ order.totalValue | number:'1.2-2' }}</td>
-            </tr>
-          </tfoot>
-        </table>
+      <div class="dialog-items-section">
+        <div class="dialog-section-title">Order Items</div>
+        <igx-grid
+          class="dialog-items-grid"
+          [data]="dialogItems()"
+          [autoGenerate]="false"
+          [allowFiltering]="false"
+          height="auto"
+          width="100%">
+
+          <igx-column field="productName" header="Product" dataType="string"></igx-column>
+
+          <igx-column header="Qty" [sortable]="false" [filterable]="false" width="110px">
+            <ng-template igxCell let-cell="cell">
+              {{ cell.row.data.quantity | number }} {{ cell.row.data.unit }}
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="pricePerUnit" header="Unit Price" dataType="number" [sortable]="false" width="110px">
+            <ng-template igxCell let-val>
+              ${{ val | number:'1.2-2' }}
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="lineTotal" header="Line Total" dataType="number" [sortable]="false" width="130px">
+            <ng-template igxCell let-val>
+              <strong style="color:#1565C0">${{ val | number:'1.2-2' }}</strong>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+
+        <div class="items-total-row">
+          <span>Total</span>
+          <strong>${{ order.totalValue | number:'1.2-2' }}</strong>
+        </div>
       </div>
 
       @if (order.notes) {

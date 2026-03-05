@@ -57,6 +57,13 @@ export class OrdersComponent {
 
   readonly selectedOrder = signal<CustomerOrder | null>(null);
 
+  readonly dialogItems = computed(() =>
+    (this.selectedOrder()?.items ?? []).map(item => ({
+      ...item,
+      lineTotal: item.quantity * item.pricePerUnit,
+    }))
+  );
+
   readonly rowClasses = {
     'delayed-order-row': (row: any) => row.data?.isDelayed === true,
     'shipped-row': (row: any) =>
