@@ -1,3 +1,19 @@
+@use "@infragistics/igniteui-angular/theming" as *;
+
+$dialog-grid-theme: grid-theme(
+  $schema: $light-material-schema,
+  $header-background: #F5F6FA,
+  $header-text-color: #424242,
+  $content-background: #FFFFFF,
+  $row-odd-background: #FFFFFF,
+  $row-even-background: #FAFBFF,
+  $row-hover-background: #EEF2FF,
+  $row-border-color: #E8EAF6,
+  $header-border-color: #C5CAE9,
+  $cell-selected-background: #E3F2FD,
+  $resize-line-color: #C5CAE9
+);
+
 // ──────────────────────────────────────────────
 // Page title
 // ──────────────────────────────────────────────
@@ -315,42 +331,20 @@
   color: var(--ig-gray-700);
 }
 
-.items-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--ig-caption-font-size);
+.dialog-items-grid {
+  @include tokens($dialog-grid-theme);
+  --ig-size: var(--ig-size-small);
+}
 
-  th {
-    background: var(--ig-gray-100);
-    padding: 8px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--ig-gray-700);
-    border-bottom: 2px solid var(--ig-gray-200);
-  }
+.dialog-items-section {
+  margin: 16px 0;
+}
 
-  td {
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--ig-gray-100);
-    color: var(--ig-gray-700);
-  }
-
-  tfoot td {
-    border-bottom: none;
-  }
-
-  &__total-label {
-    text-align: right;
-    font-weight: 600;
-    padding-top: 8px;
-  }
-
-  &__total-value {
-    font-weight: 700;
-    font-size: var(--ig-subtitle-1-font-size);
-    color: var(--ig-primary-500);
-    padding-top: 8px;
-  }
+.dialog-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #424242;
+  margin-bottom: 8px;
 }
 
 // ──────────────────────────────────────────────

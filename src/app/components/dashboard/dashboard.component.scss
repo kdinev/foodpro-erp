@@ -85,10 +85,14 @@
   grid-template-columns: 1fr 380px;
   gap: 24px;
 
-  igx-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  @media (min-width: 1920px) {
+    grid-template-columns: 1fr 460px;
+    gap: 32px;
+    igx-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   }
 
   @media (max-width: 1200px) {

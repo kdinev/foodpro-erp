@@ -22,9 +22,9 @@
         </div>
 
         <igx-grid [data]="customers()" [autoGenerate]="false" [allowFiltering]="true" height="500px" width="100%">
-          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" minWidth="160px"></igx-column>
           <igx-column field="contactName" header="Contact" [sortable]="true" dataType="string" width="160px"></igx-column>
-          <igx-column field="email" header="Email" [sortable]="true" dataType="string" width="220px"></igx-column>
+          <igx-column field="email" header="Email" [sortable]="true" dataType="string" minWidth="180px"></igx-column>
           <igx-column field="phone" header="Phone" dataType="string" width="160px"></igx-column>
           <igx-column field="country" header="Country" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
           <igx-column field="city" header="City" [sortable]="true" dataType="string" width="160px"></igx-column>
@@ -65,9 +65,9 @@
         </div>
 
         <igx-grid [data]="suppliers()" [autoGenerate]="false" [allowFiltering]="true" height="500px" width="100%">
-          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+          <igx-column field="name" header="Company Name" [sortable]="true" [filterable]="true" dataType="string" minWidth="160px"></igx-column>
           <igx-column field="contactName" header="Contact" [sortable]="true" dataType="string" width="160px"></igx-column>
-          <igx-column field="email" header="Email" dataType="string" width="220px"></igx-column>
+          <igx-column field="email" header="Email" dataType="string" minWidth="180px"></igx-column>
           <igx-column field="phone" header="Phone" dataType="string" width="160px"></igx-column>
           <igx-column field="country" header="Country" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
           <igx-column field="city" header="City" dataType="string" width="160px"></igx-column>

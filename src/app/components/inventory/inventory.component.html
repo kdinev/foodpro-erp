@@ -18,7 +18,7 @@
         <div class="tab-content-padded">
           <igx-grid [data]="products()" [autoGenerate]="false" [allowFiltering]="true"
             [rowClasses]="productRowClasses" height="520px" width="100%">
-            <igx-column field="name" header="Product Name" [sortable]="true" [filterable]="true" dataType="string" width="220px"></igx-column>
+            <igx-column field="name" header="Product Name" [sortable]="true" [filterable]="true" dataType="string" minWidth="200px"></igx-column>
             <igx-column field="sku" header="SKU" [sortable]="true" dataType="string" width="120px"></igx-column>
             <igx-column field="category" header="Category" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
             <igx-column field="totalStock" header="Total Stock" [sortable]="true" dataType="number" width="130px">
@@ -82,7 +82,7 @@
 
         <igx-grid [data]="ingredients()" [autoGenerate]="false" [allowFiltering]="true"
           [rowClasses]="ingredientRowClasses" height="520px" width="100%">
-          <igx-column field="name" header="Ingredient" [sortable]="true" [filterable]="true" dataType="string" width="180px"></igx-column>
+          <igx-column field="name" header="Ingredient" [sortable]="true" [filterable]="true" dataType="string" minWidth="160px"></igx-column>
           <igx-column field="category" header="Category" [sortable]="true" [filterable]="true" dataType="string" width="120px"></igx-column>
           <igx-column field="unit" header="Unit" dataType="string" width="80px"></igx-column>
           <igx-column field="currentStock" header="In Stock" [sortable]="true" dataType="number" width="180px">
@@ -157,8 +157,8 @@
         <igx-grid [data]="ingredientOrders()" [autoGenerate]="false" [allowFiltering]="true"
           [rowClasses]="poRowClasses" height="520px" width="100%">
           <igx-column field="poNumber" header="PO #" [sortable]="true" [filterable]="true" dataType="string" width="150px"></igx-column>
-          <igx-column field="ingredientName" header="Ingredient" [sortable]="true" [filterable]="true" dataType="string" width="170px"></igx-column>
-          <igx-column field="supplierName" header="Supplier" [sortable]="true" [filterable]="true" dataType="string" width="200px"></igx-column>
+          <igx-column field="ingredientName" header="Ingredient" [sortable]="true" [filterable]="true" dataType="string" minWidth="150px"></igx-column>
+          <igx-column field="supplierName" header="Supplier" [sortable]="true" [filterable]="true" dataType="string" minWidth="160px"></igx-column>
           <igx-column field="quantity" header="Qty" [sortable]="true" dataType="number" width="90px">
             <ng-template igxCell let-val let-cell="cell">
               {{ val | number }} {{ cell.row.data.unit }}
